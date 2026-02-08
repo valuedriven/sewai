@@ -1,0 +1,125 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.title {
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-base);
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.orderCard {
+    transition: transform var(--transition-fast);
+}
+
+.orderCard:hover {
+    transform: translateY(-2px);
+}
+
+.cardContent {
+    padding: var(--spacing-6) !important;
+}
+
+.mainInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-6);
+}
+
+.orderId {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    min-width: 120px;
+}
+
+.icon {
+    color: var(--color-primary);
+}
+
+.label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+}
+
+.value {
+    font-size: var(--font-size-base);
+    font-weight: 700;
+}
+
+.infoGroup {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    min-width: 140px;
+}
+
+.infoItem {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.statusGroup {
+    min-width: 100px;
+}
+
+.totalGroup {
+    text-align: right;
+    min-width: 100px;
+}
+
+.totalValue {
+    font-size: var(--font-size-lg);
+    font-weight: 800;
+    color: var(--color-text);
+}
+
+.detailBtn {
+    gap: var(--spacing-1);
+}
+
+@media (max-width: 1024px) {
+    .mainInfo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-6);
+    }
+}
+
+@media (max-width: 640px) {
+    .mainInfo {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-4);
+    }
+
+    .totalGroup {
+        text-align: left;
+    }
+}

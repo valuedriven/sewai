@@ -1,0 +1,148 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.title {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-6);
+}
+
+.statCard {
+    border-radius: var(--radius-lg);
+}
+
+.statContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-6) !important;
+}
+
+.statInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.statLabel {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text-muted);
+}
+
+.statValue {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: var(--color-text);
+}
+
+.statTrend {
+    font-size: var(--font-size-xs);
+    color: var(--color-success);
+    font-weight: 600;
+}
+
+.statIconWrapper {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.primary {
+    background: rgba(19, 109, 236, 0.1);
+    color: var(--color-primary);
+}
+
+.success {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--color-success);
+}
+
+.warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--color-warning);
+}
+
+.ordersCard {
+    overflow: hidden;
+}
+
+.ordersHeader {
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.viewAll {
+    gap: var(--spacing-1);
+}
+
+.noPadding {
+    padding: 0 !important;
+}
+
+.tableWrapper {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table th {
+    padding: var(--spacing-4) var(--spacing-6);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+}
+
+.table td {
+    padding: var(--spacing-4) var(--spacing-6);
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+.table tr:hover {
+    background: var(--color-surface);
+}
+
+@media (max-width: 640px) {
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+}
