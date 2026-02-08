@@ -22,7 +22,7 @@ export const MOCK_PRODUCTS = [
         name: 'Relógio Cronógrafo Steel',
         description: 'Elegância e precisão em cada detalhe.',
         price: 899.00,
-        image: 'https://images.unsplash.com/photo-1523275335684-37893b019699?q=80&w=1399&auto=format&fit=crop',
+        image: 'https://images.unsplash.com/photo-1524805444758-089113d48a6d?q=80&w=1388&auto=format&fit=crop',
         category: 'Acessórios',
         stock: 15,
     },

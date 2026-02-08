@@ -168,6 +168,27 @@ npm run build
 - Clique em "Continue to Dashboard".
 - Caso tenha ocorrido algum erro, copie a mensagem de erro e cole no chat do agente para correção.
 
+#### Configuração do Clerk
 
+- Acesse o site do Clerk <https://clerk.com/>.
+- No canto superior direito, acione o comando "New project".
+- Informe o nome do projeto.
+- Selecione a região.
+- Selecione a senha.
+- Clique em "Create project".
+- Aguarde o deploy.
+- Clique em "Continue to Dashboard".
+- Caso tenha ocorrido algum erro, copie a mensagem de erro e cole no chat do agente para correção.
 
+#### Configuração do banco de dados Supabase
+
+- Acesse o site do Supabase <https://supabase.com/>.
+- No canto superior direito, acione o comando "New project".
+- Informe o nome do projeto.
+- Selecione a região.
+- Selecione a senha.
+- Clique em "Create project".
+- Aguarde o deploy.
+- Clique em "Continue to Dashboard".
+- Caso tenha ocorrido algum erro, copie a mensagem de erro e cole no chat do agente para correção.
 
