@@ -157,6 +157,12 @@ npm run build
 
 #### Deploy na Vercel
 
+- Instale a skill da Vercel:
+
+```
+Instale a skill disponível em https://github.com/vercel-labs/agent-skills
+```
+
 - Acesse o site da Vercel <https://vercel.com/>.
 - No canto superior direito, acione o comando Add New...
 - Selecione "Project".
