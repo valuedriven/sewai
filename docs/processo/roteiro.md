@@ -144,7 +144,16 @@ npm run dev
 ```
 - Acesse a aplicação por meio do navegador web (padrão: <http://localhost:3000>).
 - Navegue pela aplicação.
-- Faça o commit e o push do projeto para o GitHub.
+
+- Execute uma construção "limpa" do projeto:
+
+```bash
+npm cache clean --force
+npm install
+npm run build
+```
+
+- Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
 
 #### Deploy na Vercel
 
@@ -157,6 +166,8 @@ npm run dev
 - Clique em "Deploy".
 - Aguarde o deploy.
 - Clique em "Continue to Dashboard".
+- Caso tenha ocorrido algum erro, copie a mensagem de erro e cole no chat do agente para correção.
+
 
 
 

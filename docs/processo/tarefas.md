@@ -16,4 +16,6 @@
 - Uma alternativa é utilizar o comando "Instale a skill disponível em <url>" no chat do agente.
 
 ## Configuração de MCP Server
-- A configuração de MCP Server consiste em editar o arquivo .agent/mcp.json e adicionar as configurações necessárias.
+
+- A configuração de MCP Server consiste em editar o arquivo .gemini/antigravity/mcp_config.json e adicionar as configurações necessárias.
+- Uma alternativa é utilizar o comando "Instale o mcp server para o serviço <serviço>" no chat do agente. 
