@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { ptBR } from "@clerk/localizations";
 import "./globals.css";
 import { MainLayout } from "@/components/layout/MainLayout";
 
@@ -19,12 +21,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={inter.className}>
-        <MainLayout>
-          {children}
-        </MainLayout>
-      </body>
-    </html>
+    <ClerkProvider localization={ptBR}>
+      <html lang="pt-BR">
+        <body className={inter.className}>
+          <MainLayout>
+            {children}
+          </MainLayout>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

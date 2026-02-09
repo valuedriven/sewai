@@ -60,7 +60,7 @@ Siga estritamente as informações providas pelos documentos:
 
 ## 2. Delivery
 
-### 2.1 Criação do projeto web 
+### 2.1 Criação do projeto web
 
 #### Configuração para integração com Stitch
 
@@ -155,7 +155,7 @@ npm run build
 
 - Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
 
-#### Deploy na Vercel
+### 2.2 Deploy com Vercel
 
 - Instale a skill da Vercel:
 
@@ -173,20 +173,60 @@ Instale a skill disponível em https://github.com/vercel-labs/agent-skills
 - Aguarde o deploy.
 - Clique em "Continue to Dashboard".
 - Caso tenha ocorrido algum erro, copie a mensagem de erro e cole no chat do agente para correção.
+- Acesse a aplicação por meio do navegador web (O endereço é disponibilizado no formato https://<projeto>.vercel.app/).
 
-#### Configuração do Clerk
+
+### 2.3 Configuração de segurança com Clerk
+
+#### Configuração de autenticação
 
 - Acesse o site do Clerk <https://clerk.com/>.
-- No canto superior direito, acione o comando "New project".
-- Informe o nome do projeto.
-- Selecione a região.
-- Selecione a senha.
-- Clique em "Create project".
-- Aguarde o deploy.
-- Clique em "Continue to Dashboard".
-- Caso tenha ocorrido algum erro, copie a mensagem de erro e cole no chat do agente para correção.
+- No menu principal, selecione a seção Applications.
+- Acione o comando New Application.
+- Para o campo Application name, informe o nome do projeto.
+- Acione o comando Create application.
+- Na página Overview, navegue até o item Set your Clerk API keys.
+- Copie o conteúdo das chaves disponibilizado.
+- Retorne ao Antigravity.
+- Crie um arquivo .env.local no repositório do projeto.
+- Coloque as informações de credenciais no arquivo .env.local.  
+- Solicite ao agente a configuração do clerk no projeto:
 
-#### Configuração do banco de dados Supabase
+```
+Configure o Clerk para realizar autenticação no projeto Next.js. Use a skill https://antigravity.codes/agent-skills/nextjs/clerk-auth
+```
+- Verifique o plano de implementação e faça a aprovação.
+- Após a conclusão, navegue na aplicação verifique se tanto o botão Login quanto o Finalizar compra apontam para a página de login.
+- Caso ocorra algum erro, copie a mensagem de erro e cole no chat do agente para correção.
+- Faça o registro e o login de um usuário.
+- Acesse o Clerk.
+- Selecione a aplicação.
+- Selecione a opção Users.
+- Verifique o usuário cadastrado no projeto.
+- Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
+
+#### Configuração do Vercel para integração com Clerk
+
+- Acesse a Vercel.
+- Selecione o projeto.
+- Selecione a opção Settings.
+- Selecione a opção Environment variables.
+- Adicione as variáveis de ambiente do Clerk.
+- Acione o comando Redeploy.
+- Acione o comando View Deployment.
+- Acesse a aplicação publicada e faça o login.
+
+
+#### Configuração de autorização
+
+- Solicite ao agente a configuração do clerk no projeto:
+
+```
+Configure o Clerk para realizar autorização no projeto Next.js. Use a skill https://antigravity.codes/agent-skills/nextjs/clerk-auth
+```
+- Verifique o plano de implementação e faça a aprovação.
+
+### 2.4 Configuração do banco de dados Supabase
 
 - Acesse o site do Supabase <https://supabase.com/>.
 - No canto superior direito, acione o comando "New project".

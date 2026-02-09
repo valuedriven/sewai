@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Trash2, Plus, Minus, ArrowRight, ShoppingBag } from 'lucide-react';
+import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent } from '@/components/ui/Card';
 import { MOCK_PRODUCTS } from '@/lib/mock-data';
@@ -100,10 +101,27 @@ export default function CartPage() {
                                     <span>{formatPrice(total)}</span>
                                 </div>
                             </div>
-                            <Button className={styles.checkoutBtn}>
-                                Finalizar Compra
-                                <ArrowRight size={18} />
-                            </Button>
+
+                            <SignedIn>
+                                <Link href="/pedidos/sucesso" className={styles.checkoutBtn}>
+                                    <Button className={styles.checkoutBtn} asChild>
+                                        <span>
+                                            Finalizar Compra
+                                            <ArrowRight size={18} />
+                                        </span>
+                                    </Button>
+                                </Link>
+                            </SignedIn>
+
+                            <SignedOut>
+                                <SignInButton mode="modal">
+                                    <Button className={styles.checkoutBtn}>
+                                        Finalizar Compra
+                                        <ArrowRight size={18} />
+                                    </Button>
+                                </SignInButton>
+                            </SignedOut>
+
                             <Link href="/" className={styles.continueLink}>
                                 Continuar Comprando
                             </Link>

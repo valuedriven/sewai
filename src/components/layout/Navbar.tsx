@@ -1,9 +1,16 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Search, ShoppingCart, User, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import {
+    SignInButton,
+    UserButton,
+    SignedIn,
+    SignedOut
+} from "@clerk/nextjs";
 import styles from './Navbar.module.css';
 
 interface NavbarProps {
@@ -17,9 +24,9 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                 <Button variant="ghost" size="icon" className={styles.menuButton} onClick={onMenuClick}>
                     <Menu size={20} />
                 </Button>
-                <div className={styles.logo}>
+                <Link href="/" className={styles.logo}>
                     <span className={styles.logoText}>Sewai</span>
-                </div>
+                </Link>
             </div>
 
             <div className={styles.center}>
@@ -33,16 +40,24 @@ export function Navbar({ onMenuClick }: NavbarProps) {
             </div>
 
             <div className={styles.right}>
-                <Button variant="ghost" size="icon" className={styles.actionButton}>
-                    <ShoppingCart size={20} />
-                    <span className={styles.badge}>0</span>
-                </Button>
-                <Button variant="ghost" size="icon" className={styles.actionButton}>
-                    <User size={20} />
-                </Button>
-                <Button variant="primary" size="sm" className={styles.loginButton}>
-                    Login
-                </Button>
+                <Link href="/carrinho">
+                    <Button variant="ghost" size="icon" className={styles.actionButton}>
+                        <ShoppingCart size={20} />
+                        <span className={styles.badge}>0</span>
+                    </Button>
+                </Link>
+
+                <SignedIn>
+                    <UserButton afterSignOutUrl="/" />
+                </SignedIn>
+
+                <SignedOut>
+                    <SignInButton mode="modal">
+                        <Button variant="primary" size="sm" className={styles.loginButton}>
+                            Login
+                        </Button>
+                    </SignInButton>
+                </SignedOut>
             </div>
         </nav>
     );
