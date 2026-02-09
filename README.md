@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SeWAI - Simple Web AI
 
-## Getting Started
+SeWAI (Simple Web AI) is a dual-flow platform designed to empower micro-entrepreneurs by bridging the gap between professional digital presence and efficient sales management.
 
-First, run the development server:
+## 🚀 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### For Customers (Digital Showcase)
+- **Digital Vitrine**: Browse a clean, professional product catalog.
+- **Smart Cart**: Easily manage items and calculate totals automatically.
+- **Order Tracking**: Historic view and detail page for all placed orders.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### For Administrators (Management Dashboard)
+- **Sales Dashboard**: Real-time KPIs for total sales, received values, and pending amounts.
+- **Catalog Management**: Full CRUD for Products and Categories.
+- **Client & Order Control**: Manage customer data and move orders through an operational flow (Novo → Pago → Preparação → ...).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Frontend**: [Next.js 16+](.agent/skills/nextjs/SKILL.md) (App Router, Server Components).
+- **Authentication**: [Clerk](.agent/skills/clerk/SKILL.md) (Role-based access).
+- **Persistence**: PostgreSQL via [Supabase](.agent/skills/supabase-postgres-best-practices/SKILL.md) & [Prisma](https://www.prisma.io/).
+- **Observability**: [Grafana Cloud](.agent/skills/grafana-dashboards/SKILL.md) (Faro & OpenTelemetry).
+- **Styling**: Vanilla CSS following the [Design System Patterns](.agent/skills/design-system-patterns/SKILL.md).
 
-## Learn More
+## 📂 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/`: Core routing and page implementation.
+- `src/components/`: Reusable UI components (follows [Vercel Composition Patterns](.agent/skills/vercel-composition-patterns/SKILL.md)).
+- `src/contexts/`: Global state management (e.g., Shopping Cart).
+- `src/lib/`: Business logic, third-party clients, and shared utilities.
+- `src/styles/`: Theme tokens and global aesthetics.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚦 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Prerequisites
+- Node.js 20+
+- npm or yarn
 
-## Deploy on Vercel
+### Installation
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables (copy `.env.example` to `.env`)
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 Resources
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [PRD (Requirements)](docs/prd.md)
+- [UI Specification](docs/spec_ui.md)
+- [Technical Specification](docs/spec_tech.md)
+- [Agent Guidelines](AGENTS.md)

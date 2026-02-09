@@ -1,84 +1,92 @@
 # Roteiro para desenvolvimento de produto
 
-Pré-requisitos:
-- Conta e repositório criados no GitHub <https://github.com/>.
-- Google Antigravity <https://antigravity.google> instalado localmente.
-- Conta Vercel <https://vercel.com/>.
-- Conta Clerk <https://www.clerk.com/>.
-- Conta Supabase <https://www.supabase.com/>.
-- Conta Grafana Cloud <https://grafana.com/cloud/>.
-
-## 1. Discovery
-
-### 1.1 Definição do problema
-
-- Identifique um cenário em que haja um problema ou oportunidade.
-- Registre o problema no arquivo docs/definicao_problema.md.
-
----
-
-### 1.2 Refinamento
-
-- A partir da análise do problema, defina o produto a ser construido.
-- Registre o resultado no arquivo docs/prd.md.
-- A partir da definição do produto, especifique os detalhes do produto.
-- Registre o resultado nos arquivos:
-    - docs/spec_tech.md
-    - docs/spec_ui.md
-- Solicite a uma IA para revisar os documentos criados.
-
----
-
-### 1.3 Desenho
-
-- Solicite a alguma IA para elaborar um prompt a ser usado na criação de protótipos:
-
-```
-Crie um arquivo markdown com um prompt para o papel de designer de UX que solicita a uma ferramenta de prototipagem como o Google Stitch criar templates de protótipos para um projeto.
-
-Siga estritamente as informações providas pelos documentos:
-
-<incluir conteúdo do arquivo docs/prd.md>
-<incluir conteúdo do arquivo docs/spec_tech.md>
-<incluir conteúdo do arquivo docs/spec_ui.md>
-```
-
-- Acesse o Stitch <https://stitch.withgoogle.com/>.
-- Selecione "Web" para o design.
-- Selecione um modelo com melhor reasoning (ex.: 3.0 Pro).
-
-- Informe o prompt criado anteriormente.
-- Avalie os resultados gerados.
-- Selecione uma das imagens e explore o recurso Preview, New Tab.
-- Selecione uma das imagens e explore o recurso Generate, Variations.
-- Selecione todas as imagens e acesse o recurso Generate, Protótipos.
-- Selecione o protótipo e o comando Interact.
-- No menu superior, acione o comando Renomear projeto (ícone de lápis).
-- Informe o nome do produto.
-
----
-
 ## 2. Delivery
 
-### 2.1 Criação do projeto web
+### 2.1 Preparação do Antigravity
 
-#### Configuração para integração com Stitch
+#### Configuração de rules
 
 - Acesse o Antigravity.
 - Selecione o painel Agent.
-- Solicite a instalação da skill do Stitch:
+- Acione a opção Additional options (símbolo de três pontos "...").
+- Selecione a opção Customizations.
+- Na seção Rules, selecione a opção +Workspace.
+- Em Enter rule name, informe "command-execution".
+- Para Activate model, selecione a opção "Always On".
+- Para Content, informe o conteúdo a seguir:
 
 ```
-Instale a skill disponível em https://github.com/google-labs-code/stitch-skills.
+# Categorização de Comandos
+
+O agente deve classificar o comando antes da execução e agir de acordo com a categoria:
+
+## Categoria Verde: Leitura e Informação
+
+- **Comandos:** `ls`, `cat`, `grep`, `pwd`, `echo`, `find`, `whoami`.
+- **Ação:** Executar imediatamente para obter contexto. Não é necessária confirmação prévia, apenas notificação da ação.
+
+## Categoria Amarela: Instalação e Build
+
+- **Comandos:** `npm install`, `pip install`, `make`, `docker build`, `git clone`.
+- **Ação:** Anunciar a intenção ("Vou instalar as dependências necessárias...") e prosseguir com a execução.
+
+## Categoria Vermelha: Modificação e Remoção
+
+- **Comandos:** `rm`, `mv` (quando sobrescreve), `sed -i`, `dd`, `kill`.
+- **Ação:** **PAUSA OBRIGATÓRIA.**
+    1.  Explique o impacto ("Este comando apagará o arquivo X permanentemente").
+    2.  Solicite confirmação explícita OU apresente o comando para o usuário copiar e colar.
+```
+
+- Salve as alterações.
+
+
+#### Configuração de skills com único agente
+
+- Acesse o Antigravity.
+- Selecione o painel Agent.
+- Solicite a instalação da skill:
+
+```
+Instale localmente neste projeto a skill disponível no endereço:
+https://github.com/google-labs-code/stitch-skills
 ```
 
 - Ao lado do item implementation_plan.md, acione o comando Open.
-- Na seção de prompt, alterne da opção "Planning" para "Fast" (execução). Repita esse procedimento sempre que for executar um plano.
+- Na seção de prompt, alterne da opção "Planning" para "Fast" (execução).
+- Repita esse procedimento sempre que for executar um plano.
 - No painel Implementation Plan, acione o comando Proceed.
 - Interaja com o agente, provendo as entradas solicitadas.
 - Ao lado do item walkthrough.md, acione o comando Open.
 - Analise o conteúdo do arquivo.
 
+#### Configuração de skills usando subagentes
+
+- Na barra superior, acione a opção Open Agent Manager.
+- Selecione o workspace do projeto.
+- Solicite a instalação das demais skills:
+
+```
+Instancie subagentes em paralelo para instalar neste projeto as skills disponíveis nos endereços:
+- https://antigravity.codes/agent-skills/nextjs/nextjs
+- https://antigravity.codes/agent-skills/architecture/design-system-patterns
+- https://github.com/vercel-labs/agent-skills
+- https://github.com/clerk/skills
+- https://github.com/supabase/agent-skills
+- https://github.com/sickn33/antigravity-awesome-skills/blob/main/skills/grafana-dashboards/SKILL.md
+```
+
+- Aguarde a conclusão. 
+- Na barra superior, acione a opção Open Editor, para retornar ao editor do projeto.
+- Solicite a remoção da pasta de agentes que não seja usada pelo antigravity (.agents e .cursor, por exemplo):
+
+```
+Remova local e globalmente as pasta de agentes que não sejam usadas pelo antigravity, tais como .agents e .cursor
+```
+
+#### Configuração de MCP Servers
+
+**Configuração de MCP Server do Stitch**
 - Selecione o painel Agent.
 - Selecione a opção Additional options (símbolo de três pontos "...").
 - Na seção MCP Store, acione o comando Manage MCP Servers.
@@ -111,19 +119,26 @@ Instale a skill disponível em https://github.com/google-labs-code/stitch-skills
 Use o mcp server e liste os projetos do Stitch.
 ```
 
+**Configuração de MCP Server do Supabase**
 - Certifique-se de que o projeto criado anteriormente está disponível.
+- Selecione o painel Agent.
+- Selecione o item Mais Opções (os três pontos "...").
+- Selecione a opção MCP Servers.
+- No campo Search MCP Servers, procure por "supabase" (sem as aspas).
+- Selecione o MCP Server do Supabase.
+- No painel Supabase, selecione a opção Configure.
+- Cole a access token obtida no Supabase.
+- Solicite ao agente para listar os projetos disponíveis:
 
-#### Criação do projeto Next.js
+```
+Use o mcp server e liste os projetos do Supabase.
+```
+
+
+### 2.2 Criação do projeto web
 
 - No painel Agent, selecione a opção Start a new conversation.
-- Solicite a instalação de novas skills.
-
-```
-Instale no projeto atual as skills https://antigravity.codes/agent-skills/nextjs/nextjs e https://antigravity.codes/agent-skills/architecture/design-system-patterns
-```
-
-- Execute o plano.
-- Abra uma nova conversação e solicite a criação de um projeto:
+- Solicite a criação de um projeto:
 
 ```
 Crie um projeto web seguindo estritamente as orientações a seguir (troque o <nome do projeto> pelo nome do projeto criado no Stitch e garanta que o @ se refira aos arquivos do projeto):
@@ -145,23 +160,30 @@ npm run dev
 - Acesse a aplicação por meio do navegador web (padrão: <http://localhost:3000>).
 - Navegue pela aplicação.
 
-- Execute uma construção "limpa" do projeto:
+#### Criação de AGENTS.md
 
-```bash
-npm cache clean --force
-npm install
-npm run build
-```
-
-- Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
-
-### 2.2 Deploy com Vercel
-
-- Instale a skill da Vercel:
+- No painel Agent, selecione a opção Start a new conversation.
+- Solicite a criação do arquivo AGENTS.md:
 
 ```
-Instale a skill disponível em https://github.com/vercel-labs/agent-skills
+Crie o arquivo AGENTS.md para o projeto usando como contexto apenas as seguintes informações:
+- documentos docs/prd.md docs/prd.md docs/spec_ui.md e docs/spec_tech.md
+- diretório src.
+Use referências relativas para os arquivos citados.
 ```
+
+#### Atualização do README.md
+
+- No painel Agent, selecione a opção Start a new conversation.
+- Solicite a criação do arquivo AGENTS.md:
+
+```
+Reconstrua o arquivo README.md utilizando as recomendações do GitHub
+```
+
+-  Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
+
+### 2.3 Deploy com Vercel
 
 - Acesse o site da Vercel <https://vercel.com/>.
 - No canto superior direito, acione o comando Add New...
@@ -176,7 +198,7 @@ Instale a skill disponível em https://github.com/vercel-labs/agent-skills
 - Acesse a aplicação por meio do navegador web (O endereço é disponibilizado no formato https://<projeto>.vercel.app/).
 
 
-### 2.3 Configuração de segurança com Clerk
+### 2.4 Configuração de segurança com Clerk
 
 #### Configuração de autenticação
 
@@ -193,7 +215,7 @@ Instale a skill disponível em https://github.com/vercel-labs/agent-skills
 - Solicite ao agente a configuração do clerk no projeto:
 
 ```
-Configure o Clerk para realizar autenticação no projeto Next.js. Use a skill https://antigravity.codes/agent-skills/nextjs/clerk-auth
+Use a skill específica do Clerk para configurar a autenticação no projeto
 ```
 - Verifique o plano de implementação e faça a aprovação.
 - Após a conclusão, navegue na aplicação verifique se tanto o botão Login quanto o Finalizar compra apontam para a página de login.
@@ -260,8 +282,7 @@ Ajustes na configuração do Clerk:
 - Verifique se o deploy foi realizado com sucesso e se as alterações foram aplicadas na aplicação publicada.
 
 
-===> PAREI AQUI..
-### 2.4 Configuração do banco de dados Supabase
+### 2.5 Configuração do banco de dados Supabase
 
 #### Obtenção das credenciais
 
@@ -275,19 +296,6 @@ Ajustes na configuração do Clerk:
 #### Habilitação do Supabase no projeto
 
 - Acesse o Antigravity.
-- Selecione o painel Agent.
-- Instale a skill do Supabase:
-
-```
-Instale a skill disponível em https://github.com/supabase/agent-skills
-```
-
-- Selecione o item Mais Opções (os três pontos "...").
-- Selecione a opção MCP Servers.
-- No campo Search MCP Servers, procure por "supabase" (sem as aspas).
-- Selecione o MCP Server do Supabase.
-- No painel Supabase, selecione a opção Configure.
-- Cole a access token obtida no Supabase.
 - Selecione o botão de salvar.
 - Selecione o painel Agent. 
 - Abra uma nova conversa com o agente.
