@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { Button } from '@/components/ui/Button';
+import { useUser } from '@clerk/nextjs';
+import { isAdmin } from '@/lib/auth';
 import styles from './Sidebar.module.css';
 
 function cn(...inputs: ClassValue[]) {
@@ -26,6 +28,7 @@ interface SidebarProps {
 }
 
 const navItems = [
+    { label: 'Início', href: '/', icon: Package, admin: false },
     { label: 'Dashboard', href: '/admin', icon: LayoutDashboard, admin: true },
     { label: 'Produtos', href: '/admin/produtos', icon: Package, admin: true },
     { label: 'Clientes', href: '/admin/clientes', icon: Users, admin: true },
@@ -35,6 +38,8 @@ const navItems = [
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
     const pathname = usePathname();
+    const { user } = useUser();
+    const isUserAdmin = isAdmin(user);
 
     return (
         <>
@@ -70,24 +75,26 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                         })}
                     </div>
 
-                    <div className={styles.section}>
-                        <span className={styles.sectionTitle}>Administração</span>
-                        {navItems.filter(item => item.admin).map((item) => {
-                            const Icon = item.icon;
-                            const isActive = pathname === item.href;
-                            return (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    className={cn(styles.navItem, isActive && styles.navItemActive)}
-                                    onClick={onClose}
-                                >
-                                    <Icon size={18} />
-                                    <span>{item.label}</span>
-                                </Link>
-                            );
-                        })}
-                    </div>
+                    {isUserAdmin && (
+                        <div className={styles.section}>
+                            <span className={styles.sectionTitle}>Administração</span>
+                            {navItems.filter(item => item.admin).map((item) => {
+                                const Icon = item.icon;
+                                const isActive = pathname === item.href;
+                                return (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className={cn(styles.navItem, isActive && styles.navItemActive)}
+                                        onClick={onClose}
+                                    >
+                                        <Icon size={18} />
+                                        <span>{item.label}</span>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    )}
                 </nav>
 
                 <div className={styles.footer}>

@@ -219,12 +219,46 @@ Configure o Clerk para realizar autenticação no projeto Next.js. Use a skill h
 
 #### Configuração de autorização
 
-- Solicite ao agente a configuração do clerk no projeto:
+Ajustes na imlementação:
+- Solicite ao agente a configuração do controle das páginas protegidas do administrador:
 
 ```
-Configure o Clerk para realizar autorização no projeto Next.js. Use a skill https://antigravity.codes/agent-skills/nextjs/clerk-auth
+Configure o controle das páginas protegidas do administrador no projeto de forma que as páginas sensíveis sejam vistas apenas por um usuário administrador logado
 ```
+
 - Verifique o plano de implementação e faça a aprovação.
+
+Ajustes na configuração do Clerk:
+- Acesse o projeto no Clerk.
+- Selecione a aplicação.
+- Selecione a opção Configure.
+- Selecione a opção Sessions.
+- Na página Sessions, selecione a opção Customize session token.
+- Para o campo Claims, informe o valor a seguir:
+
+```json
+{
+    "metadata": "{{user.public_metadata}}"
+}
+```
+- Salve as alterações.
+- Selecione a opção Users.
+- Selecine o usuário cadastrado.
+- Navegue até a seção Metadata.
+- Para o item Public, acione o comando Edit.
+- Inclua a seguinte informação:
+
+```json
+{
+    "role": "admin"
+}
+```
+
+- Salve as alterações.
+- Faça um novo login na aplicação e verifique se as páginas protegidas do administrador sejam vistas apenas por um usuário administrador logado.
+- Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
+- Verifique se o deploy foi realizado com sucesso e se as alterações foram aplicadas na aplicação publicada.
+
 
 ### 2.4 Configuração do banco de dados Supabase
 
