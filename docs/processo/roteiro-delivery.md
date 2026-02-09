@@ -279,12 +279,12 @@ Ajustes na configuração do Clerk:
 - Salve as alterações.
 - Faça um novo login na aplicação e verifique se as páginas protegidas do administrador sejam vistas apenas por um usuário administrador logado.
 - Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
-- Verifique se o deploy foi realizado com sucesso e se as alterações foram aplicadas na aplicação publicada.
+- Verifique se o deploy foi realizado com sucesso e se as alterações foram aplicadas na solução implantada.
 
 
 ### 2.5 Configuração do banco de dados Supabase
 
-#### Obtenção das credenciais
+#### Obtenção das credenciais do usuário
 
 - Faça o login no Supabase <https://supabase.com/>.
 - No menu superior, canto superior direito, selecione o perfil do usuário.
@@ -293,31 +293,52 @@ Ajustes na configuração do Clerk:
 - Acione o comando Generate new token.
 - Copie o token criado.
 
-#### Habilitação do Supabase no projeto
+#### Criação de banco de dados no Supabase
 
+- No canto superior direito, selecione a organização criada.
+- Na página Projects, acione o comando New Project.
+- Para Project name, informe o nome do projeto.
+- Para Database password, informe a senha.
+- Para Region, selecione a região mais próxima de você.
+- Acione o comando Create new project.
+- Na página do projeto, posicione o mouse sobre o endereço do banco de dados.
+- Copie os valores exibidos.
 - Acesse o Antigravity.
-- Selecione o botão de salvar.
-- Selecione o painel Agent. 
-- Abra uma nova conversa com o agente.
-- Solicite ao agente a configuração do Supabase:
+- Edite o arquivo .env.local, preenchendo os seguintes valores:
 
 ```
-Configure o Supabase para fazer a persistência dos dados. Utilize o MCP Server do Supabase.
+#Supabase
+SUPABASE_ACCESS_TOKEN=<access token>
+NEXT_PUBLIC_SUPABASE_URL=<Project URL>
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<Publishable Key>
+```
+
+#### Criação de tabelas do banco de dados
+
+- Selecione o painel Agent. 
+- Abra uma nova conversa com o agente.
+- Solicite ao agente a criação das tabelas do projeto:
+
+```
+Use o mcp server para criar as tabelas do banco de dados no Supabase.
 ```
   
 - Avalie o plano de implementação e faça a aprovação.
-- Navegue na aplicação e verifique se os dados estão sendo salvos no Supabase.
+- Acesse a aplicação com um usuário de perfil administrador.
+- Teste os cadastros de Categoria, Cliente e Produto.
+- Verifique os dados alterados no Supabase.
 
 
-#### Habilitação do Supabase no projeto
+#### Sincronização entre usuário e cliente
 
+- Selecione o painel Agent.
+- Abra uma nova conversa.
+- Solicite que seja configurada a sincronização entre o usuário autenticado no Clerk e cliente no Supabase:
 
-Cadastre novos itens como produtos, clientes e pedidos e verifique o reflexo no banco de dados do Supabase.
-
-
-Para garantir a sincronicidade entre usuário autenticado no Clerk e cliente no Supabase, informe o seguinte comando no prompt:
-
-Preciso que seja feito um ajuste de forma que, caso um usuário logado não esteja cadastrado, seja criado um registro na tabela de customers, para permitir efetivar a compra.
+```
+Ajuste a aplicação de forma que, caso um usuário logado não esteja cadastrado, seja criado um registro na tabela de customers, para permitir efetivar a compra.
+```
+- ...
 
 
 

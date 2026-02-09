@@ -19,3 +19,6 @@
 
 - A configuração de MCP Server consiste em editar o arquivo .gemini/antigravity/mcp_config.json e adicionar as configurações necessárias.
 - Uma alternativa é utilizar o comando "Instale o mcp server para o serviço <serviço>" no chat do agente. 
+
+## Criação de organização e projeto no Supabase
+

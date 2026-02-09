@@ -5,6 +5,7 @@ import { ptBR } from "@clerk/localizations";
 import { CartProvider } from "@/contexts/CartContext";
 import "./globals.css";
 import { MainLayout } from "@/components/layout/MainLayout";
+import { UserSync } from "@/components/auth/UserSync";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
       <html lang="pt-BR">
         <body className={inter.className}>
           <CartProvider>
+            <UserSync />
             <MainLayout>
               {children}
             </MainLayout>
