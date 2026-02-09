@@ -10,6 +10,7 @@ import {
     ShoppingCart,
     History,
     Settings,
+    Layers,
     X
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
@@ -28,18 +29,25 @@ interface SidebarProps {
 }
 
 const navItems = [
-    { label: 'Início', href: '/', icon: Package, admin: false },
-    { label: 'Dashboard', href: '/admin', icon: LayoutDashboard, admin: true },
-    { label: 'Produtos', href: '/admin/produtos', icon: Package, admin: true },
-    { label: 'Clientes', href: '/admin/clientes', icon: Users, admin: true },
-    { label: 'Pedidos', href: '/pedidos', icon: History, admin: false },
-    { label: 'Meu Carrinho', href: '/carrinho', icon: ShoppingCart, admin: false },
+    { label: 'Início', href: '/', icon: Package, admin: false, requireAuth: false },
+    { label: 'Dashboard', href: '/admin', icon: LayoutDashboard, admin: true, requireAuth: true },
+    { label: 'Categorias', href: '/admin/categorias', icon: Layers, admin: true, requireAuth: true },
+    { label: 'Produtos', href: '/admin/produtos', icon: Package, admin: true, requireAuth: true },
+    { label: 'Clientes', href: '/admin/clientes', icon: Users, admin: true, requireAuth: true },
+    { label: 'Pedidos', href: '/admin/pedidos', icon: History, admin: true, requireAuth: true },
+    { label: 'Meus Pedidos', href: '/pedidos', icon: History, admin: false, requireAuth: true },
+    { label: 'Meu Carrinho', href: '/carrinho', icon: ShoppingCart, admin: false, requireAuth: false },
 ];
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
     const pathname = usePathname();
-    const { user } = useUser();
+    const { user, isLoaded, isSignedIn } = useUser();
     const isUserAdmin = isAdmin(user);
+
+    const filteredNavItems = navItems.filter(item => {
+        if (item.requireAuth && !isSignedIn) return false;
+        return true;
+    });
 
     return (
         <>
@@ -58,7 +66,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 <nav className={styles.nav}>
                     <div className={styles.section}>
                         <span className={styles.sectionTitle}>Principal</span>
-                        {navItems.filter(item => !item.admin).map((item) => {
+                        {filteredNavItems.filter(item => !item.admin).map((item) => {
                             const Icon = item.icon;
                             const isActive = pathname === item.href;
                             return (
@@ -78,7 +86,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                     {isUserAdmin && (
                         <div className={styles.section}>
                             <span className={styles.sectionTitle}>Administração</span>
-                            {navItems.filter(item => item.admin).map((item) => {
+                            {filteredNavItems.filter(item => item.admin).map((item) => {
                                 const Icon = item.icon;
                                 const isActive = pathname === item.href;
                                 return (

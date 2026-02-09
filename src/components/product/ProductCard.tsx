@@ -6,6 +6,7 @@ import { ShoppingCart } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Badge';
+import { useCart } from '@/contexts/CartContext';
 import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
@@ -14,12 +15,14 @@ interface ProductCardProps {
         name: string;
         description: string;
         price: number;
-        image: string;
-        category: string;
+        image_url: string;
+        category?: string | { name: string };
     };
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+    const { addToCart } = useCart();
+
     const formattedPrice = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
@@ -29,14 +32,14 @@ export function ProductCard({ product }: ProductCardProps) {
         <Card className={styles.productCard}>
             <div className={styles.imageWrapper}>
                 <Image
-                    src={product.image}
+                    src={product.image_url}
                     alt={product.name}
                     fill
                     className={styles.image}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <Badge tone="neutral" className={styles.categoryBadge}>
-                    {product.category}
+                    {typeof product.category === 'string' ? product.category : product.category?.name}
                 </Badge>
             </div>
             <CardContent className={styles.content}>
@@ -45,7 +48,11 @@ export function ProductCard({ product }: ProductCardProps) {
             </CardContent>
             <CardFooter className={styles.footer}>
                 <span className={styles.price}>{formattedPrice}</span>
-                <Button size="sm" className={styles.addButton}>
+                <Button
+                    size="sm"
+                    className={styles.addButton}
+                    onClick={() => addToCart(product as any)}
+                >
                     <ShoppingCart size={16} className={styles.cartIcon} />
                     Adicionar
                 </Button>

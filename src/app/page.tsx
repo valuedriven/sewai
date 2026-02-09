@@ -1,9 +1,11 @@
 import React from 'react';
-import { MOCK_PRODUCTS } from '@/lib/mock-data';
+import { getProducts } from '@/lib/products';
 import { ProductCard } from '@/components/product/ProductCard';
 import styles from './page.module.css';
 
-export default function Home() {
+export default async function Home() {
+  const products = await getProducts();
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -14,9 +16,13 @@ export default function Home() {
       </header>
 
       <div className={styles.grid}>
-        {MOCK_PRODUCTS.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {products.length > 0 ? (
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        ) : (
+          <p className={styles.empty}>Nenhum produto encontrado.</p>
+        )}
       </div>
     </div>
   );

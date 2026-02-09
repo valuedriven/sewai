@@ -260,15 +260,63 @@ Ajustes na configuração do Clerk:
 - Verifique se o deploy foi realizado com sucesso e se as alterações foram aplicadas na aplicação publicada.
 
 
+===> PAREI AQUI..
 ### 2.4 Configuração do banco de dados Supabase
 
-- Acesse o site do Supabase <https://supabase.com/>.
-- No canto superior direito, acione o comando "New project".
-- Informe o nome do projeto.
-- Selecione a região.
-- Selecione a senha.
-- Clique em "Create project".
-- Aguarde o deploy.
-- Clique em "Continue to Dashboard".
-- Caso tenha ocorrido algum erro, copie a mensagem de erro e cole no chat do agente para correção.
+#### Obtenção das credenciais
+
+- Faça o login no Supabase <https://supabase.com/>.
+- No menu superior, canto superior direito, selecione o perfil do usuário.
+- Selecione o item Account Preferences.
+- Selecione o item Access Tokens.
+- Acione o comando Generate new token.
+- Copie o token criado.
+
+#### Habilitação do Supabase no projeto
+
+- Acesse o Antigravity.
+- Selecione o painel Agent.
+- Instale a skill do Supabase:
+
+```
+Instale a skill disponível em https://github.com/supabase/agent-skills
+```
+
+- Selecione o item Mais Opções (os três pontos "...").
+- Selecione a opção MCP Servers.
+- No campo Search MCP Servers, procure por "supabase" (sem as aspas).
+- Selecione o MCP Server do Supabase.
+- No painel Supabase, selecione a opção Configure.
+- Cole a access token obtida no Supabase.
+- Selecione o botão de salvar.
+- Selecione o painel Agent. 
+- Abra uma nova conversa com o agente.
+- Solicite ao agente a configuração do Supabase:
+
+```
+Configure o Supabase para fazer a persistência dos dados. Utilize o MCP Server do Supabase.
+```
+  
+- Avalie o plano de implementação e faça a aprovação.
+- Navegue na aplicação e verifique se os dados estão sendo salvos no Supabase.
+
+
+#### Habilitação do Supabase no projeto
+
+
+Cadastre novos itens como produtos, clientes e pedidos e verifique o reflexo no banco de dados do Supabase.
+
+
+Para garantir a sincronicidade entre usuário autenticado no Clerk e cliente no Supabase, informe o seguinte comando no prompt:
+
+Preciso que seja feito um ajuste de forma que, caso um usuário logado não esteja cadastrado, seja criado um registro na tabela de customers, para permitir efetivar a compra.
+
+
+
+## 2.5 Configuração de observabilidade com Grafana Cloud
+
+Informe o seguinte comando no console do agente:
+Preciso configurar o projeto para integração com o grafana cloud.
+
+
 

@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { ArrowLeft, Package, MapPin, CreditCard, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { MOCK_PRODUCTS } from '@/lib/mock-data';
+import { getOrderById } from '@/lib/orders';
 import styles from './order-details.module.css';
 
 const STATUS_MAP: Record<string, any> = {
@@ -23,27 +23,46 @@ const STATUS_MAP: Record<string, any> = {
 export default function OrderDetailsPage() {
     const params = useParams();
     const id = params.id as string;
+    const [order, setOrder] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Mock data para um pedido específico
-    const order = {
-        id,
-        date: '08/02/2026',
-        status: 'Novo',
-        paymentMethod: 'Pix',
-        address: 'Av. Paulista, 1000 - Bela Vista - São Paulo/SP - 01310-100',
-        items: [
-            { ...MOCK_PRODUCTS[0], quantity: 2 },
-            { ...MOCK_PRODUCTS[1], quantity: 1 },
-        ],
-        shipping: 25.00,
-    };
-
-    const subtotal = order.items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    const total = subtotal + order.shipping;
+    useEffect(() => {
+        async function fetchOrder() {
+            if (id) {
+                const data = await getOrderById(id);
+                setOrder(data);
+            }
+            setIsLoading(false);
+        }
+        fetchOrder();
+    }, [id]);
 
     const formatPrice = (value: number) => {
-        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+        return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value ?? 0);
     };
+
+    const formatDate = (dateString: string) => {
+        return new Date(dateString).toLocaleDateString('pt-BR');
+    };
+
+    if (isLoading) {
+        return <div className={styles.container}><p>Carregando detalhes do pedido...</p></div>;
+    }
+
+    if (!order) {
+        return (
+            <div className={styles.container}>
+                <h2 className={styles.title}>Pedido não encontrado</h2>
+                <Link href="/pedidos">
+                    <Button>Voltar para Pedidos</Button>
+                </Link>
+            </div>
+        );
+    }
+
+    const subtotal = order.order_items?.reduce((acc: number, item: any) => acc + (item.unit_price * item.quantity), 0) || 0;
+    const shipping = 25.00;
+    const total = order.total_amount;
 
     return (
         <div className={styles.container}>
@@ -55,8 +74,8 @@ export default function OrderDetailsPage() {
                     </Button>
                 </Link>
                 <div className={styles.titleRow}>
-                    <h1 className={styles.title}>Pedido #{id}</h1>
-                    <Badge tone={STATUS_MAP[order.status]}>{order.status}</Badge>
+                    <h1 className={styles.title}>Pedido #{order.order_number}</h1>
+                    <Badge tone={STATUS_MAP[order.status] || 'neutral'}>{order.status}</Badge>
                 </div>
             </header>
 
@@ -68,17 +87,17 @@ export default function OrderDetailsPage() {
                         </CardHeader>
                         <CardContent className={styles.noPadding}>
                             <div className={styles.itemsList}>
-                                {order.items.map((item) => (
+                                {order.order_items?.map((item: any) => (
                                     <div key={item.id} className={styles.item}>
                                         <div className={styles.itemImage}>
-                                            <img src={item.image} alt={item.name} />
+                                            <img src={item.product?.image_url} alt={item.product?.name} />
                                         </div>
                                         <div className={styles.itemInfo}>
-                                            <h4 className={styles.itemName}>{item.name}</h4>
-                                            <p className={styles.itemQty}>{item.quantity}x {formatPrice(item.price)}</p>
+                                            <h4 className={styles.itemName}>{item.product?.name}</h4>
+                                            <p className={styles.itemQty}>{item.quantity}x {formatPrice(item.unit_price)}</p>
                                         </div>
                                         <div className={styles.itemTotal}>
-                                            {formatPrice(item.price * item.quantity)}
+                                            {formatPrice(item.unit_price * item.quantity)}
                                         </div>
                                     </div>
                                 ))}
@@ -99,7 +118,7 @@ export default function OrderDetailsPage() {
                             </div>
                             <div className={styles.summaryLine}>
                                 <span>Frete</span>
-                                <span>{formatPrice(order.shipping)}</span>
+                                <span>{formatPrice(shipping)}</span>
                             </div>
                             <div className={styles.divider} />
                             <div className={`${styles.summaryLine} ${styles.totalLine}`}>
@@ -118,21 +137,21 @@ export default function OrderDetailsPage() {
                                 <Clock size={18} className={styles.icon} />
                                 <div>
                                     <label>Data do Pedido</label>
-                                    <p>{order.date}</p>
+                                    <p>{formatDate(order.created_at)}</p>
                                 </div>
                             </div>
                             <div className={styles.infoItem}>
                                 <CreditCard size={18} className={styles.icon} />
                                 <div>
                                     <label>Pagamento</label>
-                                    <p>{order.paymentMethod}</p>
+                                    <p>{order.payment_method || 'A definir'}</p>
                                 </div>
                             </div>
                             <div className={styles.infoItem}>
                                 <MapPin size={18} className={styles.icon} />
                                 <div>
                                     <label>Endereço de Entrega</label>
-                                    <p>{order.address}</p>
+                                    <p>{order.shipping_address}</p>
                                 </div>
                             </div>
                         </CardContent>
