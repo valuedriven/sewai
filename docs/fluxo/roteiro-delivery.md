@@ -164,6 +164,7 @@ Não crie o projeto backend no momento!
 Não configure nenhuma integração no momento!
 A execução será apenas local inicialmente!
 ```
+
 - Execute o projeto e monitore o progresso.
 - No menu superior, selecione a opção Terminal, New Terminal.
 - Inicie o servidor local:
@@ -173,6 +174,15 @@ npm run dev
 ```
 - Acesse a aplicação por meio do navegador web (padrão: <http://localhost:3000>).
 - Navegue pela aplicação.
+
+#### Atualização do README.md
+
+- No painel Agent, selecione a opção Start a new conversation.
+- Solicite a atualização do arquivo README.md:
+
+```
+Reconstrua o arquivo README.md utilizando as recomendações do GitHub
+```
 
 #### Criação de AGENTS.md
 
@@ -184,15 +194,6 @@ Crie o arquivo AGENTS.md para o projeto usando como contexto apenas as seguintes
 - documentos docs/prd.md docs/prd.md docs/spec_ui.md e docs/spec_tech.md
 - diretório src.
 Use referências relativas para os arquivos citados.
-```
-
-#### Atualização do README.md
-
-- No painel Agent, selecione a opção Start a new conversation.
-- Solicite a criação do arquivo AGENTS.md:
-
-```
-Reconstrua o arquivo README.md utilizando as recomendações do GitHub
 ```
 
 -  Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
@@ -231,6 +232,7 @@ Reconstrua o arquivo README.md utilizando as recomendações do GitHub
 ```
 Use a skill específica do Clerk para configurar a autenticação no projeto
 ```
+
 - Verifique o plano de implementação e faça a aprovação.
 - Após a conclusão, navegue na aplicação verifique se tanto o botão Login quanto o Finalizar compra apontam para a página de login.
 - Caso ocorra algum erro, copie a mensagem de erro e cole no chat do agente para correção.
@@ -240,6 +242,7 @@ Use a skill específica do Clerk para configurar a autenticação no projeto
 - Selecione a opção Users.
 - Verifique o usuário cadastrado no projeto.
 - Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
+
 
 #### Configuração do Vercel para integração com Clerk
 
