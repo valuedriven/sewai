@@ -152,11 +152,11 @@ Use o mcp server e liste os projetos do Supabase.
 ### 2.2 Criação do projeto web
 
 - No painel Agent, selecione a opção Start a new conversation.
-- Solicite a criação de um projeto:
+- Solicite a criação de um projeto (troque o <nome do projeto> pelo nome do projeto criado no Stitch e garanta que o @ se refira aos arquivos do projeto):
 
 ```
-Crie um projeto web seguindo estritamente as orientações a seguir (troque o <nome do projeto> pelo nome do projeto criado no Stitch e garanta que o @ se refira aos arquivos do projeto):
-- skills nextjs e design-systems
+Crie um projeto web seguindo estritamente as orientações a seguir:
+- Use as skills nextjs e design-systems
 - documentos @docs/spec_ui.md e @docs/spec_tech.md
 - imagens disponíveis no projeto Stitch <nome do projeto>
 
@@ -411,3 +411,7 @@ NEXT_PUBLIC_FARO_APP_NAME=<projeto>
 ```
 Configure o Grafana para realizar a observabilidade do frontend
 ```
+
+---
+
+Fim do roteiro de entrega.
