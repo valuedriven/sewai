@@ -325,8 +325,15 @@ Use o mcp server para criar as tabelas do banco de dados no Supabase.
   
 - Avalie o plano de implementação e faça a aprovação.
 - Acesse a aplicação com um usuário de perfil administrador.
-- Teste os cadastros de Categoria, Cliente e Produto.
-- Verifique os dados alterados no Supabase.
+- Cadastre itens relativos a categoria, cliente e produto (use imagens disponíveis em https://unsplash.com/)
+- Acesse o Supabase.
+- Na página Projects, selecione o projeto criado.
+- No menu lateral esquerdo, selecione o item Database.
+- Selecione o schema public.
+- Verifique os dados persistidos.
+- Acesse o Vercel e inclua as variáveis de ambiente do Supabase.
+- Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
+- Verifique a aplicação publicada.
 
 
 #### Sincronização entre usuário e cliente
@@ -338,7 +345,10 @@ Use o mcp server para criar as tabelas do banco de dados no Supabase.
 ```
 Ajuste a aplicação de forma que, caso um usuário logado não esteja cadastrado, seja criado um registro na tabela de customers, para permitir efetivar a compra.
 ```
-- ...
+- Retorne a aplicação, faça cadastro como usuário comum faça uma nova compra.
+- Verifique se o cliente foi criado no Supabase.
+- Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
+- Verifique a aplicação publicada.
 
 
 

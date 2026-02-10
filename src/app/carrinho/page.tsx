@@ -9,11 +9,13 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { useCart } from '@/contexts/CartContext';
 import { createOrder } from '@/lib/orders';
 import { useRouter } from 'next/navigation';
+import { useToast } from '@/components/ui/Toast';
 import styles from './cart.module.css';
 
 export default function CartPage() {
     const { items, subtotal, shipping, total, updateQuantity, removeFromCart, clearCart } = useCart();
     const { user } = useUser();
+    const { showToast } = useToast();
     const router = useRouter();
     const [isPending, setIsPending] = React.useState(false);
 
@@ -41,15 +43,16 @@ export default function CartPage() {
                 items: orderItems
             });
 
-            if (result.success) {
+            if (result.success && result.orderId) {
                 clearCart();
-                router.push('/pedidos/sucesso');
+                showToast('Pedido realizado!', 'Seu pedido foi processado com sucesso.', 'success');
+                router.push(`/pedidos/${result.orderId}`);
             } else {
-                alert('Erro ao processar pedido. Tente novamente.');
+                showToast('Erro no pedido', 'Não foi possível processar seu pedido. Tente novamente.', 'error');
             }
         } catch (error) {
             console.error('Checkout error:', error);
-            alert('Erro inesperado. Tente novamente.');
+            showToast('Erro inesperado', 'Ocorreu um erro ao finalizar sua compra.', 'error');
         } finally {
             setIsPending(false);
         }

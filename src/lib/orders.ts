@@ -86,6 +86,13 @@ export async function getCustomerOrders(customerId: string) {
 }
 
 export async function getOrderById(orderId: string) {
+    // Basic UUID validation to prevent database errors for invalid formats
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(orderId)) {
+        console.warn('Invalid order ID format:', orderId);
+        return null;
+    }
+
     const { data, error } = await supabase
         .from('orders')
         .select(`

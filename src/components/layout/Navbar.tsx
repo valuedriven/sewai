@@ -11,6 +11,7 @@ import {
     SignedIn,
     SignedOut
 } from "@clerk/nextjs";
+import { useCart } from '@/contexts/CartContext';
 import styles from './Navbar.module.css';
 
 interface NavbarProps {
@@ -18,6 +19,8 @@ interface NavbarProps {
 }
 
 export function Navbar({ onMenuClick }: NavbarProps) {
+    const { totalItems } = useCart();
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.left}>
@@ -43,7 +46,9 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                 <Link href="/carrinho">
                     <Button variant="ghost" size="icon" className={styles.actionButton}>
                         <ShoppingCart size={20} />
-                        <span className={styles.badge}>0</span>
+                        {totalItems > 0 && (
+                            <span className={styles.badge}>{totalItems}</span>
+                        )}
                     </Button>
                 </Link>
 
