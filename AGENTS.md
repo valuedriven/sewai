@@ -59,3 +59,11 @@ Welcome, Agent! This document provides the necessary context and standards for c
 - [PRD (Product Requirements)](docs/prd.md)
 - [UI Specification](docs/spec_ui.md)
 - [Technical Specification](docs/spec_tech.md)
+
+## 7. Restrições (Context Constraints)
+1. **Forbidden Directories:** Você NÃO deve ler, analisar ou sugerir alterações em arquivos localizados nos seguintes diretórios:
+   - `./docs/fluxos/`
+   - `./next/`
+   - `./node_modules/`
+   - `./public/`
+2. Trate esses diretórios como inexistentes para fins de geração de código.

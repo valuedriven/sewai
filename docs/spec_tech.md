@@ -8,12 +8,12 @@ Este documento descreve como os requisitos não funcionais do produto e-micro-co
 
 ## 2. Arquitetura de Referência
 
-- Estilo arquitetural: aplicação web com backend desacoplado via APIs RESTful.
-- Componentes principais: Frontend Web, Backend de Aplicação e Banco de Dados.
-- Serviço de observabilidade: aderente ao padrão OpenTelemetry (backend e frontend).
-- Serviço de segurança: aderente aos padrões OpenID Connect e OAuth 2.0.
-- Comunicação: HTTP/HTTPS com payloads JSON.
-- Infraestrutura: utilização de contêineres no padrão OCI.
+- **Estilo arquitetural:** aplicação web com backend desacoplado via APIs RESTful.
+- **Componentes principais:** Frontend Web, Backend de Aplicação e Banco de Dados.
+- **Serviço de observabilidade:** aderente ao padrão OpenTelemetry (backend e frontend).
+- **Serviço de segurança:** aderente aos padrões OpenID Connect e OAuth 2.0.
+- **Comunicação:** HTTP/HTTPS com payloads JSON.
+- **Infraestrutura:** utilização de contêineres no padrão OCI.
 
 ---
 

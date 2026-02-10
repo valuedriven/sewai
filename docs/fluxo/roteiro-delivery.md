@@ -8,81 +8,95 @@
 
 - Acesse o Antigravity.
 - Selecione o painel Agent.
-- Acione a opção Additional options (símbolo de três pontos "...").
-- Selecione a opção Customizations.
-- Na seção Rules, selecione a opção +Workspace.
-- Em Enter rule name, informe "command-execution".
-- Para Activate model, selecione a opção "Always On".
-- Para Content, informe o conteúdo a seguir:
+- Solicite ao agente a criação da rule a seguir:
 
 ```
-# Categorização de Comandos
+Configure a rule a seguir no contexto do projeto:
 
-O agente deve classificar o comando antes da execução e agir de acordo com a categoria:
+# Rule: Terminal Governance & DevSecOps Guardrails
 
-## Categoria Verde: Leitura e Informação
+## Contexto e Persona
+Atue como um Especialista em DevSecOps e Engenharia de Plataforma. Sua missão é gerenciar a execução de comandos no terminal com foco em segurança, padronização e eficiência, minimizando fricções desnecessárias em tarefas de configuração e maximizando o controle em ações destrutivas.
 
-- **Comandos:** `ls`, `cat`, `grep`, `pwd`, `echo`, `find`, `whoami`.
-- **Ação:** Executar imediatamente para obter contexto. Não é necessária confirmação prévia, apenas notificação da ação.
+## 1. Autonomia de Configuração (Modo Irrestrito)
+Você tem permissão total para executar ações de auto-configuração sem necessidade de confirmação prévia:
+- Instalação de novas skills e ferramentas do agente.
+- Configuração de Model Context Protocol (MCPs).
+- Criação e modificação de arquivos de regras (.rules).
 
-## Categoria Amarela: Instalação e Build
+## 2. Protocolos de Verificação Pré-Execução
+Antes de qualquer comando operacional:
+- **Identificação de Stack:** Verifique o `package.json` ou ambiente para garantir compatibilidade de versões (Node.js, etc.).
+- **Gerenciador de Pacotes:** Utilize exclusivamente o **npm** (não utilize yarn/pnpm a menos que detecte arquivos de lock específicos).
+- **Prontidão de Infra:** Para comandos Docker, valide se o daemon está ativo antes de prosseguir.
+- **Dry-Run:** Sempre utilize a flag `--dry-run` em migrações de banco de dados ou deleções em Cloud quando disponível.
 
-- **Comandos:** `npm install`, `pip install`, `make`, `docker build`, `git clone`.
-- **Ação:** Anunciar a intenção ("Vou instalar as dependências necessárias...") e prosseguir com a execução.
+## 3. Classificação de Comandos e Níveis de Permissão
 
-## Categoria Vermelha: Modificação e Remoção
+### 🟢 Categoria Verde: Exploração e Contexto
+* **Comandos:** `ls`, `cat`, `grep`, `pwd`, `echo`, `find`, `whoami`.
+* **Ação:** Executar imediatamente para obter contexto. Notifique o usuário sobre a ação, mas não aguarde resposta.
 
-- **Comandos:** `rm`, `mv` (quando sobrescreve), `sed -i`, `dd`, `kill`.
-- **Ação:** **PAUSA OBRIGATÓRIA.**
-    1.  Explique o impacto ("Este comando apagará o arquivo X permanentemente").
-    2.  Solicite confirmação explícita OU apresente o comando para o usuário copiar e colar.
-```
+### 🟡 Categoria Amarela: Instalação e Build
+* **Comandos:** `npm install`, `pip install`, `make`, `docker build`, `git clone`.
+* **Ação:** Anuncie a intenção claramente ("Vou instalar as dependências X...") e proceda com a execução.
 
-- Salve as alterações.
+### 🔴 Categoria Vermelha: Modificação e Remoção
+* **Comandos:** `rm`, `mv` (sobrescrita), `sed -i`, `dd`, `kill`.
+* **Ação: PAUSA OBRIGATÓRIA.**
+    1. Explique o impacto exato (ex: "Isso removerá permanentemente o diretório /dist").
+    2. Solicite confirmação explícita **OU** apresente o comando formatado para que o usuário execute manualmente.
+    3. **Proibição Estrita:** Deleções em massa (`rm -rf /` ou `rm -rf *`) exigem aviso de perigo crítico e confirmação dupla.
 
+## 4. Gestão de Fluxo e Erros
+- **Execuções em Background:** Comandos de longa duração (ex: `next dev`, `docker-compose up`) devem ser sugeridos para execução em abas separadas, alertando que o terminal ficará ocupado.
+- **Auto-Correção:** Em caso de erro (Exit Code != 0), sua próxima resposta deve obrigatoriamente analisar o log de erro e sugerir a correção técnica antes de tentar a reexecução.
 
-#### Configuração de skills com único agente
-
-- Acesse o Antigravity.
-- Selecione o painel Agent.
-- Solicite a instalação da skill:
-
-```
-Instale localmente neste projeto a skill disponível no endereço:
-https://github.com/google-labs-code/stitch-skills
+## 5. Formatação de Saída
+Sempre informe ao usuário em qual categoria o comando se encaixa antes de executá-lo ou solicitar permissão, utilizando os prefixos: `[EXPLORAÇÃO]`, `[BUILD]` ou `[CRÍTICO]`.
 ```
 
 - Ao lado do item implementation_plan.md, acione o comando Open.
-- Na seção de prompt, alterne da opção "Planning" para "Fast" (execução).
-- Repita esse procedimento sempre que for executar um plano.
+- Na seção de prompt, alterne da opção "Planning" para "Fast" (execução). Repita esse procedimento sempre que for executar um plano.
 - No painel Implementation Plan, acione o comando Proceed.
 - Interaja com o agente, provendo as entradas solicitadas.
+
 - Ao lado do item walkthrough.md, acione o comando Open.
 - Analise o conteúdo do arquivo.
+- Analise também o conteúdo do arquivo Task.
+- Verifique no diretório .agents se a rule foi configurada.
 
-#### Configuração de skills usando subagentes
 
-- Na barra superior, acione a opção Open Agent Manager.
-- Selecione o workspace do projeto.
-- Solicite a instalação das demais skills:
+#### Configuração de skills 
 
-```
-Instancie subagentes em paralelo para instalar neste projeto as skills disponíveis nos endereços:
-- https://antigravity.codes/agent-skills/nextjs/nextjs
-- https://antigravity.codes/agent-skills/architecture/design-system-patterns
-- https://github.com/vercel-labs/agent-skills
-- https://github.com/clerk/skills
-- https://github.com/supabase/agent-skills
-- https://github.com/sickn33/antigravity-awesome-skills/blob/main/skills/grafana-dashboards/SKILL.md
-```
-
-- Aguarde a conclusão. 
-- Na barra superior, acione a opção Open Editor, para retornar ao editor do projeto.
-- Solicite a remoção da pasta de agentes que não seja usada pelo antigravity (.agents e .cursor, por exemplo):
+- Acesse o Antigravity.
+- Selecione o painel Agent.
+- Solicite a instalação das skills:
 
 ```
-Remova local e globalmente as pasta de agentes que não sejam usadas pelo antigravity, tais como .agents e .cursor
+Instale localmente as skills dos repositórios e endereços listados abaixo.
+
+Nota de Performance: Para os endereços sob o domínio antigravity.codes e caminhos diretos de arquivos, utilize o modo de importação de conteúdo para evitar a varredura completa de diretórios, reduzindo o tempo de processamento.
+
+1. Repositórios de Skills (GitHub):
+https://github.com/google-labs-code/stitch-skills
+https://github.com/vercel-labs/agent-skills
+https://github.com/clerk/skills
+https://github.com/supabase/agent-skills
+
+2. Skills de Conteúdo Direto (Non-Repo):
+https://antigravity.codes/agent-skills/nextjs/nextjs
+https://antigravity.codes/agent-skills/architecture/design-system-patterns
+https://github.com/sickn33/antigravity-awesome-skills/blob/main/skills/grafana-dashboards/SKILL.md
+
+Manutenção do Ambiente
+Remova, de forma local e global, todos os diretórios de agentes que não são utilizados nativamente pelo antigravity.
+
+Diretórios para Exclusão:
+.agents/
+.cursor/
 ```
+- Verifique no diretório .agents se as skills foram instaladas.
 
 #### Configuração de MCP Servers
 
@@ -394,7 +408,3 @@ NEXT_PUBLIC_FARO_APP_NAME=<projeto>
 ```
 Configure o Grafana para realizar a observabilidade do frontend
 ```
-
-
-
-

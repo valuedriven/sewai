@@ -10,22 +10,11 @@ Pré-requisitos:
 - Conta Supabase <https://www.supabase.com/>.
 - Conta Grafana Cloud <https://grafana.com/cloud/>.
 
-# Fluxo de trabalho
-
-O objetivo é garantir:
+Os objetivos são:
 - Clareza de escopo
 - Redução de ambiguidade
 - Consistência entre requisitos, design e implementação
 - Uso eficiente de modelos de IA como copilotos de desenvolvimento
-
-```mermaid
-flowchart LR
-subgraph Discovery
-end
-subgraph Delivery
-end
-Discovery --> Delivery
-```
 
 Diretrizes gerais:
 - Usar saída de cada atividade como contexto para atividade seguinte.
