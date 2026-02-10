@@ -106,14 +106,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </nav>
 
                 <div className={styles.footer}>
-                    <Link
-                        href="/settings"
-                        className={styles.navItem}
-                        onClick={onClose}
-                    >
-                        <Settings size={18} />
-                        <span>Configurações</span>
-                    </Link>
+                    <p className={styles.version}>v1.0.0</p>
                 </div>
             </aside>
         </>
