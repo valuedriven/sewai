@@ -11,6 +11,8 @@
   "dependencies": {
     "@clerk/localizations": "^3.35.3",
     "@clerk/nextjs": "6.37.3",
+    "@grafana/faro-web-sdk": "^2.2.3",
+    "@grafana/faro-web-tracing": "^2.2.3",
     "@supabase/supabase-js": "^2.95.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

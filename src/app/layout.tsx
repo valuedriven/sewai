@@ -7,6 +7,7 @@ import { ToastProvider } from "@/components/ui/Toast";
 import "./globals.css";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { UserSync } from "@/components/auth/UserSync";
+import { FaroInit } from "@/components/telemetry/FaroInit";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,6 +28,7 @@ export default function RootLayout({
     <ClerkProvider localization={ptBR}>
       <html lang="pt-BR">
         <body className={inter.className}>
+          <FaroInit />
           <ToastProvider>
             <CartProvider>
               <UserSync />
