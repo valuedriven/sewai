@@ -63,7 +63,7 @@ Welcome, Agent! This document provides the necessary context and standards for c
 ## 7. Restrições (Context Constraints)
 1. **Forbidden Directories:** Você NÃO deve ler, analisar ou sugerir alterações em arquivos localizados nos seguintes diretórios:
    - `./docs/fluxos/`
-   - `./next/`
+   - `./.next/`
    - `./node_modules/`
    - `./public/`
 2. Trate esses diretórios como inexistentes para fins de geração de código.

@@ -18,6 +18,7 @@ export default function AdminProductsPage() {
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
     const { showToast } = useToast();
 
     // Form state
@@ -135,6 +136,17 @@ export default function AdminProductsPage() {
         }));
     };
 
+    const filteredProducts = products.filter(product => {
+        const searchLower = searchQuery.toLowerCase();
+        const categoryName = typeof product.category === 'string' ? product.category : product.category?.name || '';
+
+        return (
+            product.name.toLowerCase().includes(searchLower) ||
+            (product.description && product.description.toLowerCase().includes(searchLower)) ||
+            categoryName.toLowerCase().includes(searchLower)
+        );
+    });
+
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -152,7 +164,12 @@ export default function AdminProductsPage() {
                     <div className={styles.toolbar}>
                         <div className={styles.searchWrapper}>
                             <Search className={styles.searchIcon} size={18} />
-                            <Input placeholder="Pesquisar produtos..." className={styles.searchInput} />
+                            <Input
+                                placeholder="Pesquisar produtos..."
+                                className={styles.searchInput}
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
                         </div>
                     </div>
 
@@ -173,7 +190,7 @@ export default function AdminProductsPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {products.map((product) => (
+                                    {filteredProducts.map((product) => (
                                         <tr key={product.id}>
                                             <td>
                                                 <div className={styles.thumbnail}>

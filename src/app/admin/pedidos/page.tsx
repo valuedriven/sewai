@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
+import Link from 'next/link';
 import { getAllOrders } from '@/lib/orders';
 import styles from './pedidos.module.css';
 
@@ -86,9 +87,11 @@ export default function AdminOrdersPage() {
                                             </td>
                                             <td>
                                                 <div className={styles.actions}>
-                                                    <Button variant="ghost" size="icon">
-                                                        <ChevronRight size={18} />
-                                                    </Button>
+                                                    <Link href={`/admin/pedidos/${order.id}`}>
+                                                        <Button variant="ghost" size="icon">
+                                                            <ChevronRight size={18} />
+                                                        </Button>
+                                                    </Link>
                                                 </div>
                                             </td>
                                         </tr>

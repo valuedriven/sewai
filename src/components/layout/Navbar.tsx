@@ -11,6 +11,7 @@ import {
     SignedIn,
     SignedOut
 } from "@clerk/nextjs";
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCart } from '@/contexts/CartContext';
 import styles from './Navbar.module.css';
 
@@ -20,6 +21,21 @@ interface NavbarProps {
 
 export function Navbar({ onMenuClick }: NavbarProps) {
     const { totalItems } = useCart();
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const currentQuery = searchParams.get('q') || '';
+    const [searchValue, setSearchValue] = React.useState(currentQuery);
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        const params = new URLSearchParams(searchParams.toString());
+        if (searchValue) {
+            params.set('q', searchValue);
+        } else {
+            params.delete('q');
+        }
+        router.push(`/?${params.toString()}`);
+    };
 
     return (
         <nav className={styles.navbar}>
@@ -33,13 +49,15 @@ export function Navbar({ onMenuClick }: NavbarProps) {
             </div>
 
             <div className={styles.center}>
-                <div className={styles.searchWrapper}>
+                <form className={styles.searchWrapper} onSubmit={handleSearch}>
                     <Search className={styles.searchIcon} size={18} />
                     <Input
                         placeholder="Buscar produtos..."
                         className={styles.searchInput}
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
                     />
-                </div>
+                </form>
             </div>
 
             <div className={styles.right}>
