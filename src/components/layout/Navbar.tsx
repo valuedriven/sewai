@@ -19,8 +19,7 @@ interface NavbarProps {
     onMenuClick?: () => void;
 }
 
-export function Navbar({ onMenuClick }: NavbarProps) {
-    const { totalItems } = useCart();
+function SearchBarContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const currentQuery = searchParams.get('q') || '';
@@ -38,6 +37,22 @@ export function Navbar({ onMenuClick }: NavbarProps) {
     };
 
     return (
+        <form className={styles.searchWrapper} onSubmit={handleSearch}>
+            <Search className={styles.searchIcon} size={18} />
+            <Input
+                placeholder="Buscar produtos..."
+                className={styles.searchInput}
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+            />
+        </form>
+    );
+}
+
+export function Navbar({ onMenuClick }: NavbarProps) {
+    const { totalItems } = useCart();
+
+    return (
         <nav className={styles.navbar}>
             <div className={styles.left}>
                 <Button variant="ghost" size="icon" className={styles.menuButton} onClick={onMenuClick}>
@@ -49,15 +64,14 @@ export function Navbar({ onMenuClick }: NavbarProps) {
             </div>
 
             <div className={styles.center}>
-                <form className={styles.searchWrapper} onSubmit={handleSearch}>
-                    <Search className={styles.searchIcon} size={18} />
-                    <Input
-                        placeholder="Buscar produtos..."
-                        className={styles.searchInput}
-                        value={searchValue}
-                        onChange={(e) => setSearchValue(e.target.value)}
-                    />
-                </form>
+                <React.Suspense fallback={
+                    <div className={styles.searchWrapper}>
+                        <Search className={styles.searchIcon} size={18} />
+                        <Input placeholder="Buscar produtos..." className={styles.searchInput} disabled />
+                    </div>
+                }>
+                    <SearchBarContent />
+                </React.Suspense>
             </div>
 
             <div className={styles.right}>
