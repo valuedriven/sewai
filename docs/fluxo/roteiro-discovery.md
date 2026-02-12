@@ -2,7 +2,7 @@
 
 Pré-requisitos:
 - Repositório criado no GitHub.
-
+- 
 ## 1. Discovery
 
 ### 1.1 Definição do problema

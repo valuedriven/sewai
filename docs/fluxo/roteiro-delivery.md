@@ -71,7 +71,7 @@ Sempre informe ao usuário em qual categoria o comando se encaixa antes de execu
 - Cole o texto a seguir no prompt, solicitando a instalação das skills:
 
 ```
-Instale localmente as skills dos repositórios e endereços listados abaixo.
+Instale localmente e em um diretório separado padrão esperado pelo antigravity as skills dos repositórios e endereços listados abaixo.
 
 Nota de Performance: Para os endereços sob o domínio antigravity.codes e caminhos diretos de arquivos, utilize o modo de importação de conteúdo para evitar a varredura completa de diretórios, reduzindo o tempo de processamento.
 
@@ -137,13 +137,6 @@ SUPABASE_ACCESS_TOKEN=
 # https://resend.com/emails
 RESEND_API_KEY=
 
-# GRAFANA
-# Acessar https://grafana.com
-# Criar uma stack
-# Acessar stack: https://<stack>.grafana.net/org/serviceaccounts (substitua <stack> pelo nome da sua stack)
-# Criar um service account e copiar o token
-GRAFANA_URL=https://<stack>.grafana.net (substitua <stack> pelo nome da sua stack)
-GRAFANA_ACCESS_POLICY_TOKEN=
 ```
 
 **Configuração dos MCP servers**
@@ -498,6 +491,9 @@ Ajuste a aplicação de forma que, caso um usuário logado não esteja cadastrad
 #Grafana Faro
 NEXT_PUBLIC_FARO_URL=<Faro URL>
 NEXT_PUBLIC_FARO_APP_NAME=<projeto>
+GRAFANA_URL=https://<stack>.grafana.net
+GRAFANA_ACCESS_POLICY_TOKEN=
+
 ```
 - Solicite a configuração do Grafana:
 

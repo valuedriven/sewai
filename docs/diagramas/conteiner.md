@@ -1,35 +1,38 @@
-# C4 – Diagrama de Contêiner  
+# C4 – Diagrama de Contêiner
 
 ```mermaid
 C4Container
-    title Sistema SeWAI - Diagrama de Contêiner
+title Sistema SeWAI - Diagrama de Contêiner
 
-    Person(customer, "Cliente")
-    Person(admin, "Administrador")
+Person(customer, "Cliente", "Usuário final da vitrine e carrinho")
+Person(admin, "Administrador", "Gerencia tenants e configurações")
 
-    System_Boundary(sewai_boundary, "SeWAI") {
+System_Boundary(sewai_boundary, "SeWAI") {
+    Container(frontend, "Frontend Web", "Next.js 16+", "Interface responsiva, gerenciamento de estado e consumo de APIs")
+    Container(backend, "Backend API", "NestJS 11+", "Regras de negócio, Webhooks, Multitenancy e Auditoria")        
+}
 
-        Container(frontend, "Frontend Web", "Next.js 16+", 
-        "Interface da vitrine, carrinho, área autenticada e dashboard")
+System_Ext(clerk, "Clerk", "Identity & Auth: Gerencia autenticação e sessões")
+System_Ext(supabase, "Supabase", "Dados relacionais, RLS e schemas por tenant")
+System_Ext(resend, "Resend", "E-mail: Disparos transacionais")
+System_Ext(grafana, "Grafana Cloud", "Observabilidade: Logs (Loki) e Métricas (Prometheus)")
 
-        Container(backend, "Backend API", "NestJS 11+", 
-        "API REST, regras de negócio, tenancy, autenticação, auditoria")
+%% Relações de Usuário
+Rel(customer, frontend, "Navega e compra", "HTTPS")
+Rel(admin, frontend, "Administra a plataforma", "HTTPS")
 
-        ContainerDb(database, "PostgreSQL", "Supabase / PostgreSQL 15+", 
-        "Persistência relacional com RLS e schema por tenant")
-    }
+%% Fluxo de Autenticação (Ajustado)
+Rel(frontend, clerk, "Autentica usuário", "OAuth2 / SDK")
+Rel(backend, clerk, "Valida Sessão / Busca Metadados", "SDK/HTTPS")
+Rel(clerk, backend, "Sincroniza usuários (Webhooks)", "HTTPS/JSON")
 
-    System_Ext(clerk, "Clerk", "Identity Provider")
-    System_Ext(resend, "Resend", "Serviço de e-mail")
-    System_Ext(grafana, "Grafana Cloud", "Observabilidade")
+%% Fluxo de Dados Interno
+Rel(frontend, backend, "Consome API REST", "JSON/HTTPS")
+Rel(backend, supabase, "Leitura/Escrita", "Prisma ORM")
 
-    Rel(customer, frontend, "Usa", "HTTPS")
-    Rel(admin, frontend, "Usa", "HTTPS")
+%% Integrações Externas
+Rel(backend, resend, "Envia e-mails", "SMTP/API")
+Rel(backend, grafana, "Exporta Telemetria", "Otlp/HTTPS")
+Rel(frontend, grafana, "Logs de erro/Real User Monitoring", "HTTPS")
 
-    Rel(frontend, backend, "Consome API REST", "JSON/HTTPS")
-    Rel(backend, database, "Consulta e persiste", "Prisma ORM")
-
-    Rel(backend, clerk, "Valida JWT")
-    Rel(backend, resend, "Envia e-mails")
-    Rel(backend, grafana, "Exporta logs e métricas")
 ```
