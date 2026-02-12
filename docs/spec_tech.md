@@ -19,25 +19,31 @@ Este documento descreve como os requisitos não funcionais do produto e-micro-co
 
 ## 3. Stack Tecnológica Recomendada
 
-### 3.1 - Versão inicial
+### Stack Base
 
 - **Frontend:** Next.js 16+ (App Router).
 - **Backend:** NestJS 11+; API RESTful.
 - **Persistência:** PostgreSQL 15+.
 - **ORM:** Prisma 5+.
-- **Integrações:**
-    - **Pipeline CI/CD:** GitHub Actions.
-    - **Persistência:** Supabase.
-    - **Deployment:** Vercel (backend e frontend).
-    - **Segurança (autenticação e autorização):** Clerk.
-    - **Observabilidade:** Grafana Cloud (backend e frontend).
 
-### 3.2 - Versão futura (Ajustes)
+### Integrações
+
+- **Pipeline CI/CD:** GitHub Actions.
+- **Persistência:** Supabase.
+- **Deployment:** Vercel.
+- **Segurança (autenticação e autorização):** Clerk.
+- **Notificações:** Resender.
+- **Observabilidade:** Grafana Cloud.
+
+### Integrações - Stack Futura
 
 - **Persistência:** AWS RDS PostgreSQL.
-- **Segurança (autenticação e autorização):** AWS Cognito.
-- **Observabilidade:** AWS Cloudwatch.
 - **Deployment:** AWS EKS (Kubernetes) com Terraform.
+- **Segurança (autenticação e autorização):** AWS Cognito.
+- **Mensagens:** AWS SQS.
+- **Notificações:** AWS SES.
+- **Observabilidade:** AWS Cloudwatch.
+
 
 ---
 

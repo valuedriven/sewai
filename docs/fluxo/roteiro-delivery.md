@@ -8,11 +8,14 @@
 
 - Acesse o Antigravity.
 - Selecione o painel Agent.
-- Solicite ao agente a criação da rule a seguir:
-
+- Selecione os três pontos (...).
+- Selecione a opção "Customizations".
+- Na seção Rule, acione o comando +Workspace.
+- Para Enter rule name, informe "terminal-governance" (sem aspas).
+- Pressione enter.
+- Para Activation Mode, mantenha a opção Always On.
+- Para Content, cole o conteúdo a seguir:
 ```
-Configure a rule a seguir no contexto do projeto:
-
 # Rule: Terminal Governance & DevSecOps Guardrails
 
 ## Contexto e Persona
@@ -55,14 +58,8 @@ Antes de qualquer comando operacional:
 Sempre informe ao usuário em qual categoria o comando se encaixa antes de executá-lo ou solicitar permissão, utilizando os prefixos: `[EXPLORAÇÃO]`, `[BUILD]` ou `[CRÍTICO]`.
 ```
 
-- Ao lado do item implementation_plan.md, acione o comando Open.
-- Na seção de prompt, alterne da opção "Planning" para "Fast" (execução). Repita esse procedimento sempre que for executar um plano.
-- No painel Implementation Plan, acione o comando Proceed.
-- Interaja com o agente, provendo as entradas solicitadas.
-
-- Ao lado do item walkthrough.md, acione o comando Open.
-- Analise o conteúdo do arquivo.
-- Analise também o conteúdo do arquivo Task.
+- Salve o conteúdo, pressionando Ctrl+S, simultaneamente.
+- No painel Agent, acione o comando Back to agent.
 - Verifique no diretório .agents se a rule foi configurada.
 
 
@@ -70,7 +67,8 @@ Sempre informe ao usuário em qual categoria o comando se encaixa antes de execu
 
 - Acesse o Antigravity.
 - Selecione o painel Agent.
-- Solicite a instalação das skills:
+- Acione o comando "+", Start a New Conversation (repita esse procedimento em todo início de seção, pelo menos).
+- Cole o texto a seguir no prompt, solicitando a instalação das skills:
 
 ```
 Instale localmente as skills dos repositórios e endereços listados abaixo.
@@ -95,6 +93,14 @@ Diretórios para Exclusão:
 .agents/
 .cursor/
 ```
+- Ao lado do item implementation_plan.md, acione o comando Open.
+- Na seção de prompt, alterne da opção "Planning" para "Fast" (execução).
+- Repita esse procedimento sempre que for executar um plano.
+- No painel Implementation Plan, acione o comando Proceed.
+- Interaja com o agente, provendo as entradas solicitadas.
+- Ao lado do item walkthrough.md, acione o comando Open.
+- Analise o conteúdo do arquivo.
+- Analise também o conteúdo do arquivo Task.
 - Verifique no diretório .agents se as skills foram instaladas.
 
 #### Configuração de MCP Servers
@@ -227,13 +233,13 @@ Use o mcp server do Stitch para listar os projetos
 - Solicite listar as organizações do Supabase:
 
 ```
-Use o mcp server do Supabase para listar as organizações e projetos.
+Use o mcp server do Supabase para listar as organizações e projetos
 ```
 
 - Solicite listar os times e projetos do Vercel:
 
 ```
-Use o mcp server do Vercel para listar os times e projetos.
+Use o mcp server do Vercel para listar os times e projetos
 ```
 
 ### 2.2 Criação do projeto web
