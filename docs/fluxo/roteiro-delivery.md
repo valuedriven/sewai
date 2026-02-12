@@ -26,7 +26,6 @@ Você tem permissão total para executar ações de auto-configuração sem nece
 
 ## 2. Protocolos de Verificação Pré-Execução
 Antes de qualquer comando operacional:
-- **Identificação de Stack:** Verifique o `package.json` ou ambiente para garantir compatibilidade de versões (Node.js, etc.).
 - **Gerenciador de Pacotes:** Utilize exclusivamente o **npm** (não utilize yarn/pnpm a menos que detecte arquivos de lock específicos).
 - **Prontidão de Infra:** Para comandos Docker, valide se o daemon está ativo antes de prosseguir.
 - **Dry-Run:** Sempre utilize a flag `--dry-run` em migrações de banco de dados ou deleções em Cloud quando disponível.
@@ -100,12 +99,55 @@ Diretórios para Exclusão:
 
 #### Configuração de MCP Servers
 
-**Configuração de MCP Server do Stitch**
+**Obtenção de credenciais**
+
+- Crie o arquivo .env.local no diretório raiz do projeto.
+- Acesse os endereços informados junto a cada credencia.
+- Navegue em cada aplicação e obtenha os valores solicitados.
+
+```
+# GITHUB
+# https://github.com/settings/tokens/new
+GITHUB_PERSONAL_ACCESS_TOKEN=
+
+# STITCH
+# https://stitch.withgoogle.com/settings
+STITCH_API_KEY=
+
+# CLERK
+# https://dashboard.clerk.com/apps/
+# Criar uma aplicação e copiar a chave de API
+CLERK_SECRET_KEY=
+
+# VERCEL
+# https://vercel.com/account/settings/tokens
+VERCEL_API_TOKEN=
+
+# SUPABASE
+# https://supabase.com/dashboard/account/tokens
+SUPABASE_ACCESS_TOKEN=
+
+# RESEND
+# https://resend.com/emails
+RESEND_API_KEY=
+
+# GRAFANA
+# Acessar https://grafana.com
+# Criar uma stack
+# Acessar stack: https://<stack>.grafana.net/org/serviceaccounts (substitua <stack> pelo nome da sua stack)
+# Criar um service account e copiar o token
+GRAFANA_URL=https://<stack>.grafana.net (substitua <stack> pelo nome da sua stack)
+GRAFANA_ACCESS_POLICY_TOKEN=
+```
+
+**Configuração dos MCP servers**
+
 - Selecione o painel Agent.
 - Selecione a opção Additional options (símbolo de três pontos "...").
 - Na seção MCP Store, acione o comando Manage MCP Servers.
 - No painel Manage MCP servers, acione o comando View raw config.
-- Inclua o seguinte conteúdo:
+- Substitua o conteúdo existente pelo seguinte:
+- Substitua o valor de cada chave pelo valor obtido no arquivo .env.local
 
 ```json
 {
@@ -113,41 +155,86 @@ Diretórios para Exclusão:
     "stitch": {
       "serverUrl": "https://stitch.googleapis.com/mcp",
       "headers": {
-        "X-Goog-Api-Key": "YOUR-API-KEY"
+        "X-Goog-Api-Key": "<STITCH_API_KEY>"
       }
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<GITHUB_PERSONAL_ACCESS_TOKEN>"
+      }
+    },
+    "clerk": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@clerk/clerk-mcp"
+      ],
+      "env": {
+        "CLERK_SECRET_KEY": "<CLERK_SECRET_KEY>"
+      }
+    },
+    "vercel": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://mcp.vercel.com"
+      ],
+      "env": {
+        "VERCEL_API_TOKEN": "<VERCEL_API_TOKEN>"
+      }
+    },
+    "resend": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-server-resend"
+      ],
+      "env": {
+        "RESEND_API_KEY": "<RESEND_API_KEY>"
+      }
+    },
+    "supabase-mcp-server": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--access-token",
+        "<SUPABASE_ACCESS_TOKEN>"
+      ],
+      "env": {}
     }
   }
-}`
-```
-- Selecione o Stitch.
-- No canto superior direito, acione o perfil do usuário.
-- Selecione a opção "Configurações do app Stitch".
-- Navegue até a seção Chave de API.
-- Acione o comando Criar chave.
-- Copie o conteúdo da chave criada.
-- Retorne ao Antigravity.
-- Troque o trecho YOUR-API-KEY pela chave obtida no Stitch.
-- Solicite ao agente para listar os projetos disponíveis:
-
-```
-Use o mcp server e liste os projetos do Stitch.
+}
 ```
 
-**Configuração de MCP Server do Supabase**
-- Certifique-se de que o projeto criado anteriormente está disponível.
-- Selecione o painel Agent.
-- Selecione o item Mais Opções (os três pontos "...").
-- Selecione a opção MCP Servers.
-- No campo Search MCP Servers, procure por "supabase" (sem as aspas).
-- Selecione o MCP Server do Supabase.
-- No painel Supabase, selecione a opção Configure.
-- Cole a access token obtida no Supabase.
-- Solicite ao agente para listar os projetos disponíveis:
+- Salve o arquivo.
+- Acione comando Refresh.
+
+#### Teste de MCP Servers
+
+
+- Solicite listar os projetos disponíveis no Stitch:
 
 ```
-Use o mcp server e liste os projetos do Supabase.
+Use o mcp server do Stitch para listar os projetos
 ```
 
+- Solicite listar as organizações do Supabase:
+
+```
+Use o mcp server do Supabase para listar as organizações e projetos.
+```
+
+- Solicite listar os times e projetos do Vercel:
+
+```
+Use o mcp server do Vercel para listar os times e projetos.
+```
 
 ### 2.2 Criação do projeto web
 
@@ -414,4 +501,4 @@ Configure o Grafana para realizar a observabilidade do frontend
 
 ---
 
-Fim do roteiro de entrega.
+Fim do roteiro de delivery.

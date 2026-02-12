@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # Rule: Terminal Governance & DevSecOps Guardrails
 
 ## Contexto e Persona
@@ -11,7 +15,6 @@ Você tem permissão total para executar ações de auto-configuração sem nece
 
 ## 2. Protocolos de Verificação Pré-Execução
 Antes de qualquer comando operacional:
-- **Identificação de Stack:** Verifique o `package.json` ou ambiente para garantir compatibilidade de versões (Node.js, etc.).
 - **Gerenciador de Pacotes:** Utilize exclusivamente o **npm** (não utilize yarn/pnpm a menos que detecte arquivos de lock específicos).
 - **Prontidão de Infra:** Para comandos Docker, valide se o daemon está ativo antes de prosseguir.
 - **Dry-Run:** Sempre utilize a flag `--dry-run` em migrações de banco de dados ou deleções em Cloud quando disponível.

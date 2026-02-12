@@ -20,5 +20,18 @@
 - A configuração de MCP Server consiste em editar o arquivo .gemini/antigravity/mcp_config.json e adicionar as configurações necessárias.
 - Uma alternativa é utilizar o comando "Instale o mcp server para o serviço <serviço>" no chat do agente. 
 
-## Criação de organização e projeto no Supabase
+#### Configuração de autenticação com o Clerk
+
+- Acesse o site do Clerk <https://clerk.com/>.
+- No menu principal, selecione a seção Applications.
+- Acione o comando New Application.
+- Para o campo Application name, informe o nome do projeto.
+- Acione o comando Create application.
+- Na página Overview, navegue até o item Set your Clerk API keys.
+- Copie o conteúdo das chaves disponibilizado.
+- Retorne ao Antigravity.
+- Crie um arquivo .env.local no repositório do projeto.
+- Coloque as informações de credenciais no arquivo .env.local.  
+- Solicite ao agente a configuração do clerk no projeto:
+
 
