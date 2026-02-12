@@ -122,7 +122,8 @@ STITCH_API_KEY=
 
 # CLERK
 # https://dashboard.clerk.com/apps/
-# Criar uma aplicação e copiar a chave de API
+# Criar uma aplicação e copiar as chaves de API
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 
 # VERCEL
@@ -132,6 +133,9 @@ VERCEL_API_TOKEN=
 # SUPABASE
 # https://supabase.com/dashboard/account/tokens
 SUPABASE_ACCESS_TOKEN=
+#NEXT_PUBLIC_SUPABASE_URL=(será preenchida posteriormente)
+#NEXT_PUBLIC_SUPABASE_ANON_KEY=(será preenchida posteriormente)
+
 
 # RESEND
 # https://resend.com/emails

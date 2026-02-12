@@ -10,6 +10,7 @@ import { useCart } from '@/contexts/CartContext';
 import { createOrder } from '@/lib/orders';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/Toast';
+import { sendOrderConfirmation } from '@/app/actions/order';
 import styles from './cart.module.css';
 
 export default function CartPage() {
@@ -44,8 +45,22 @@ export default function CartPage() {
             });
 
             if (result.success && result.orderId) {
+                // Send confirmation email
+                const emailResult = await sendOrderConfirmation({
+                    email: user.primaryEmailAddress?.emailAddress || '',
+                    orderId: result.orderId,
+                    customerName: user.fullName || user.username || 'Cliente',
+                    items: items,
+                    total: total
+                });
+
+                if (!emailResult.success) {
+                    console.error('Failed to send confirmation email:', emailResult.error);
+                    // Don't block the user flow, just log the error
+                }
+
                 clearCart();
-                showToast('Pedido realizado!', 'Seu pedido foi processado com sucesso.', 'success');
+                showToast('Pedido realizado!', 'Seu pedido foi processado com sucesso. Verifique seu e-mail.', 'success');
                 router.push(`/pedidos/${result.orderId}`);
             } else {
                 showToast('Erro no pedido', 'Não foi possível processar seu pedido. Tente novamente.', 'error');
