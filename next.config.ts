@@ -7,16 +7,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.jouse.com.br',
-      },
-      {
-        protocol: 'https',
         hostname: 'unsplash.com',
-      },
+      }
     ],
   },
 };
