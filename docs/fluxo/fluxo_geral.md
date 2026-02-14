@@ -1,4 +1,4 @@
-# Roteiro para desenvolvimento de software com IA
+# Roteiro para desenvolvimento de soluções com IA
 
 ```mermaid
 ---
@@ -32,9 +32,7 @@ Pré-requisitos:
 - Git <https://git-scm.com/> instalado localmente.
 - Conta GitHub <https://github.com/>.
 - Conta Vercel <https://vercel.com/>.
-- Conta Clerk <https://www.clerk.com/>.
 - Conta Supabase <https://www.supabase.com/>.
-- Conta Grafana Cloud <https://grafana.com/cloud/>.
 
 Diretrizes gerais:
 - Usar saída de cada atividade como contexto para atividade seguinte.
