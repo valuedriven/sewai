@@ -1,10 +1,8 @@
-# Roteiro para desenvolvimento de produto
+# Roteiro de Delivery
 
-## 2. Delivery
+## 2.1 Preparação do Antigravity
 
-### 2.1 Preparação do Antigravity
-
-#### Configuração de rules
+### Configuração de rules
 
 - Acesse o Antigravity.
 - Selecione o painel Agent.
@@ -63,7 +61,7 @@ Sempre informe ao usuário em qual categoria o comando se encaixa antes de execu
 - Verifique no diretório .agents se a rule foi configurada.
 
 
-#### Configuração de skills
+### Configuração de skills
 
 - Acesse o Antigravity.
 - Selecione o painel Agent.
@@ -101,7 +99,7 @@ Diretórios para Exclusão:
 - Analise também o conteúdo do arquivo Task.
 - Verifique no diretório .agents se as skills foram instaladas.
 
-#### Configuração de MCP Servers
+### Configuração de MCP Servers
 
 **Obtenção de credenciais**
 
@@ -185,7 +183,7 @@ SUPABASE_ACCESS_TOKEN=
 - Salve o arquivo.
 - Acione comando Refresh.
 
-#### Teste de MCP Servers
+### Teste de MCP Servers
 
 
 - Solicite listar os projetos disponíveis no Stitch:
@@ -206,7 +204,7 @@ Use o mcp server do Supabase para listar as organizações e projetos
 Use o mcp server do Vercel para listar os times e projetos
 ```
 
-### 2.2 Criação do projeto web
+## 2.2 Criação do projeto web
 
 - No painel Agent, selecione a opção Start a new conversation.
 - Solicite a criação de um projeto (troque o <nome do projeto> pelo nome do projeto criado no Stitch e garanta que o @ se refira aos arquivos do projeto):
@@ -232,7 +230,7 @@ npm run dev
 - Acesse a aplicação por meio do navegador web (padrão: <http://localhost:3000>).
 - Navegue pela aplicação.
 
-#### Atualização do README.md
+### Atualização de informações do projeto
 
 - No painel Agent, selecione a opção Start a new conversation.
 - Solicite a atualização do arquivo README.md:
@@ -240,8 +238,6 @@ npm run dev
 ```
 Reconstrua o arquivo README.md utilizando as recomendações do GitHub
 ```
-
-#### Criação de AGENTS.md
 
 - No painel Agent, selecione a opção Start a new conversation.
 - Solicite a criação do arquivo AGENTS.md:
@@ -255,7 +251,7 @@ Use referências relativas para os arquivos citados.
 
 -  Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
 
-### 2.3 Deploy com Vercel
+## 2.3 Deploy com Vercel
 
 - Acesse o site da Vercel <https://vercel.com/>.
 - No canto superior direito, acione o comando Add New...
@@ -270,9 +266,9 @@ Use referências relativas para os arquivos citados.
 - Acesse a aplicação por meio do navegador web (O endereço é disponibilizado no formato https://<projeto>.vercel.app/).
 
 
-### 2.4 Configuração do banco de dados Supabase
+## 2.4 Configuração do banco de dados Supabase
 
-#### Criação de banco de dados no Supabase
+### Criação de banco de dados no Supabase
 
 - No canto superior direito, selecione a organização criada.
 - Na página Projects, acione o comando New Project.
@@ -292,7 +288,7 @@ NEXT_PUBLIC_SUPABASE_URL=<Project URL>
 NEXT_PUBLIC_SUPABASE_ANON_KEY=<Publishable Key>
 ```
 
-#### Criação de tabelas do banco de dados
+### Criação de tabelas do banco de dados
 
 - Selecione o painel Agent. 
 - Abra uma nova conversa com o agente.
@@ -313,8 +309,6 @@ Use o mcp server para criar as tabelas do banco de dados no Supabase.
 - Acesse o Vercel e inclua as variáveis de ambiente do Supabase.
 - Faça o commit das modificações locais e o push para o repositório remoto no GitHub.
 - Verifique a aplicação publicada.
-
-
 
 ---
 
