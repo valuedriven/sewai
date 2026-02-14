@@ -272,15 +272,6 @@ Use referências relativas para os arquivos citados.
 
 ### 2.4 Configuração do banco de dados Supabase
 
-#### Obtenção das credenciais do usuário
-
-- Faça o login no Supabase <https://supabase.com/>.
-- No menu superior, canto superior direito, selecione o perfil do usuário.
-- Selecione o item Account Preferences.
-- Selecione o item Access Tokens.
-- Acione o comando Generate new token.
-- Copie o token criado.
-
 #### Criação de banco de dados no Supabase
 
 - No canto superior direito, selecione a organização criada.

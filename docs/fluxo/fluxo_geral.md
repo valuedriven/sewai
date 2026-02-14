@@ -8,20 +8,15 @@ graph LR
 
 subgraph Discovery
     A[<a href='https://github.com/valuedriven/sewai/blob/main/docs/fluxo/fluxo_discovery.md'>Fluxo</a>]
-    B[Roteiro]
+    B[<a href='https://github.com/valuedriven/sewai/blob/main/docs/fluxo/roteiro_discovery.md'>Roteiro</a>]
 end
 
 subgraph Delivery
-    C[Fluxo]
-    D[<a href='./roteiro_delivery.md'>Roteiro</a>]
+    C[<a href='https://github.com/valuedriven/sewai/blob/main/docs/fluxo/fluxo_delivery.md'>Fluxo</a>]
+    D[<a href='https://github.com/valuedriven/sewai/blob/main/docs/fluxo/roteiro_delivery.md'>Roteiro</a>]
 end
 
 Discovery --> Delivery
-
-click A "[./fluxo_discovery.md]()"
-click B "./roteiro_discovery.md"
-click C "./fluxo_delivery.md"
-click D "./roteiro_delivery.md"
 
 ```
 

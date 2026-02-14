@@ -34,4 +34,13 @@
 - Coloque as informações de credenciais no arquivo .env.local.  
 - Solicite ao agente a configuração do clerk no projeto:
 
+#### Obtenção das credenciais do usuário
+
+- Faça o login no Supabase <https://supabase.com/>.
+- No menu superior, canto superior direito, selecione o perfil do usuário.
+- Selecione o item Account Preferences.
+- Selecione o item Access Tokens.
+- Acione o comando Generate new token.
+- Copie o token criado.
+
 
