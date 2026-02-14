@@ -7,7 +7,7 @@ title: Visão geral do fluxo de desenvolvimento com IA
 graph LR 
 
 subgraph Discovery
-    A[<a href='./fluxo_discovery.md'>Fluxo</a>]
+    A[<a href='./docs/fluxo/fluxo_discovery.md'>Fluxo</a>]
     B[<a href='./roteiro_discovery.md'>Roteiro</a>]
 end
 
