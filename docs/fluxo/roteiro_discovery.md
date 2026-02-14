@@ -1,11 +1,9 @@
-# Roteiro para desenvolvimento de produto
+# Roteiro de Discovery
 
 Pré-requisitos:
 - Repositório criado no GitHub.
-- 
-## 1. Discovery
 
-### 1.1 Definição do problema
+## 1.1 Definição do problema
 
 - Identifique um cenário em que haja um problema ou oportunidade que você deseja resolver.
 - Execute o seguinte prompt:
@@ -41,9 +39,9 @@ Resultado esperado:
 
 ---
 
-### 1.2 Refinamento
+## 1.2 Refinamento
 
-#### Definição do produto
+### Definição do produto
 
 - A partir da análise do problema, defina o produto a ser construido.
 - Execute o seguinte prompt:
@@ -132,7 +130,7 @@ Critérios de Aceitação:
 - Revise o documento e faça os devidos ajustes.
 - Registre o problema no arquivo docs/prd.md.
 
-#### Especificação técnica
+### Especificação técnica
 
 - A partir da definição do produto, elabore uma especificação técnica
 - Execute o seguinte prompt:
@@ -209,7 +207,7 @@ backend, persistência, ORM, Integrações etc.]
 - Revise o documento e faça os devidos ajustes.
 - Registre o problema no arquivo docs/spec_tech.md.
 
-#### Especificação de UI
+### Especificação de UI
 
 - A partir da definição do produto, elabore uma especificação de ui
 - Execute o seguinte prompt:
@@ -259,7 +257,7 @@ Resultado esperado:
 - Revise o documento e faça os devidos ajustes.
 - Registre o problema no arquivo docs/spec_ui.md.
 
-#### Revisão do refinamento
+### Revisão do refinamento
 
 - Solicite a uma IA para revisar os documentos criados.
 - Execute o seguinte prompt:
@@ -276,7 +274,7 @@ Revise os seguintes documentos:
 - Atualize os documentos com as revisões.
 ---
 
-### 1.3 Desenho
+## 1.3 Desenho
 
 - Solicite a alguma IA para elaborar um prompt a ser usado na criação de protótipos:
 
