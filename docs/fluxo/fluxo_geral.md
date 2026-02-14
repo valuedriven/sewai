@@ -18,10 +18,10 @@ end
 
 Discovery --> Delivery
 
-click A "./fluxo_discovery.md"
-click B "./roteiro_discovery.md"
-click C "./fluxo_delivery.md"
-click D "./roteiro_delivery.md"
+click A "./fluxo_discovery"
+click B "./roteiro_discovery"
+click C "./fluxo_delivery"
+click D "./roteiro_delivery"
 
 ```
 
