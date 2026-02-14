@@ -7,21 +7,16 @@ title: Visão geral do fluxo de desenvolvimento com IA
 graph LR 
 
 subgraph Discovery
-    A[Detalhamento do fluxo]
-    B[Roteiro]
+    A[<a href='./fluxo_discovery.md'>Fluxo</a>]
+    B[<a href='./roteiro_discovery.md'>Roteiro</a>]
 end
 
 subgraph Delivery
-    C[Detalhamento do fluxo]
-    D[Roteiro]
+    C[<a href='./fluxo_delivery.md'>Fluxo</a>]
+    D[<a href='./roteiro_delivery.md'>Roteiro</a>]
 end
 
 Discovery --> Delivery
-
-click A "./fluxo_discovery"
-click B "./roteiro_discovery"
-click C "./fluxo_delivery"
-click D "./roteiro_delivery"
 
 ```
 
